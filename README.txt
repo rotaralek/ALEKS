@@ -22,3 +22,7 @@ Pages
 	woocommerce
 	BuddyPress
 	bbPress
+
+несколько шапок
+C сайдбаром и без
+несколько колонок
