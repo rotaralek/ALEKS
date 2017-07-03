@@ -1,5 +1,5 @@
 # ALEKS
-Gallery theme (ALEKS  - Clean Photography & Portfolio WordPress Theme)
+Blog theme (ALEKS  - Clean Blog & Portfolio WordPress Theme)
 http://azalea.elated-themes.com/landing
 Pages
 	Home page
