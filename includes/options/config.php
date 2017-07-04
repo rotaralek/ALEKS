@@ -459,130 +459,6 @@ Redux::setSection( $opt_name, array(
 ) );
 
 Redux::setSection( $opt_name, array(
-	'title'  => __( 'Top image', 'local' ),
-	'id'     => 'opt-top-image',
-	'icon'   => 'el el-th-list',
-	'fields' => array(
-		array(
-			'id'       => 'opt-top-image-tours',
-			'type'     => 'media',
-			'title'    => __( 'Tours', 'local' ),
-			'subtitle' => __( 'Upload an image. Size 1920x400', 'local' )
-		),
-		array(
-			'id'       => 'opt-top-image-excursions',
-			'type'     => 'media',
-			'title'    => __( 'Excursions', 'local' ),
-			'subtitle' => __( 'Upload an image. Size 1920x400', 'local' )
-		),
-		array(
-			'id'       => 'opt-top-image-cruises',
-			'type'     => 'media',
-			'title'    => __( 'Cruises', 'local' ),
-			'subtitle' => __( 'Upload an image. Size 1920x400', 'local' )
-		),
-		array(
-			'id'       => 'opt-top-image-hotels',
-			'type'     => 'media',
-			'title'    => __( 'Hotels', 'local' ),
-			'subtitle' => __( 'Upload an image. Size 1920x400', 'local' )
-		),
-		array(
-			'id'       => 'opt-top-image-rooms',
-			'type'     => 'media',
-			'title'    => __( 'Rooms', 'local' ),
-			'subtitle' => __( 'Upload an image. Size 1920x400', 'local' )
-		),
-		array(
-			'id'       => 'opt-top-image-car-rentals',
-			'type'     => 'media',
-			'title'    => __( 'Car rentals', 'local' ),
-			'subtitle' => __( 'Upload an image. Size 1920x400', 'local' )
-		),
-		array(
-			'id'       => 'opt-top-image-news',
-			'type'     => 'media',
-			'title'    => __( 'News', 'local' ),
-			'subtitle' => __( 'Upload an image. Size 1920x400', 'local' )
-		),
-		array(
-			'id'       => 'opt-top-image-reviews',
-			'type'     => 'media',
-			'title'    => __( 'Reviews', 'local' ),
-			'subtitle' => __( 'Upload an image. Size 1920x400', 'local' )
-		),
-		array(
-			'id'       => 'opt-top-image-blog',
-			'type'     => 'media',
-			'title'    => __( 'Blog', 'local' ),
-			'subtitle' => __( 'Upload an image. Size 1920x400', 'local' )
-		),
-		array(
-			'id'       => 'opt-top-image-page',
-			'type'     => 'media',
-			'title'    => __( 'Pages', 'local' ),
-			'subtitle' => __( 'Upload an image. Size 1920x400', 'local' )
-		),
-	)
-) );
-
-Redux::setSection( $opt_name, array(
-	'title'  => __( 'Currency', 'local' ),
-	'id'     => 'opt-currency-header',
-	'icon'   => 'el el-usd',
-	'fields' => array(
-		array(
-			'id'       => 'opt-currency',
-			'title'    => __( 'Currency', 'local' ),
-			'type'     => 'text',
-			'subtitle' => __( 'Insert the currency. Ex: €', 'local' ),
-			'default'  => '€'
-		)
-	)
-) );
-
-Redux::setSection( $opt_name, array(
-	'title'  => __( 'Information', 'local' ),
-	'id'     => 'opt-information',
-	'icon'   => 'el el-italic',
-	'fields' => array(
-		array(
-			'id'      => 'opt-information-show',
-			'title'   => __( 'Show information block?', 'local' ),
-			'type'    => 'select',
-			'options' => array(
-				'show' => 'Show',
-				'hide' => 'Hide'
-			)
-		),
-		array(
-			'id'       => 'opt-information-text-begin',
-			'title'    => __( 'Text begin', 'local' ),
-			'type'     => 'textarea',
-			'subtitle' => __( 'Insert the text.', 'local' )
-		),
-		array(
-			'id'       => 'opt-information-number-begin',
-			'title'    => __( 'Number begin', 'local' ),
-			'type'     => 'text',
-			'subtitle' => __( 'Insert the numbers.', 'local' )
-		),
-		array(
-			'id'       => 'opt-information-number-end',
-			'title'    => __( 'Number end', 'local' ),
-			'type'     => 'text',
-			'subtitle' => __( 'Insert the numbers.', 'local' )
-		),
-		array(
-			'id'       => 'opt-information-text-end',
-			'title'    => __( 'Text end', 'local' ),
-			'type'     => 'textarea',
-			'subtitle' => __( 'Insert the text.', 'local' )
-		)
-	)
-) );
-
-Redux::setSection( $opt_name, array(
 	'title'  => __( 'Spinners', 'local' ),
 	'id'     => 'opt-spinners',
 	'desc'   => __( 'Select the loader style.', 'local' ),
@@ -628,100 +504,21 @@ Redux::setSection( $opt_name, array(
 ) );
 
 Redux::setSection( $opt_name, array(
-	'title'  => __( 'Pagination', 'local' ),
-	'id'     => 'opt-pagination',
-	'icon'   => 'el el-th-list',
-	'fields' => array(
-		array(
-			'id'       => 'opt-pagination-tours',
-			'type'     => 'text',
-			'title'    => __( 'Tours', 'local' ),
-			'desc'     => __( 'Default: 6', 'local' ),
-			'subtitle' => __( 'Insert the number of posts', 'local' ),
-			'default'  => '6',
-		),
-		array(
-			'id'       => 'opt-pagination-cruises',
-			'type'     => 'text',
-			'title'    => __( 'Cruises', 'local' ),
-			'desc'     => __( 'Default: 4', 'local' ),
-			'subtitle' => __( 'Insert the number of posts', 'local' ),
-			'default'  => '4',
-		),
-		array(
-			'id'       => 'opt-pagination-excursions',
-			'type'     => 'text',
-			'title'    => __( 'Excursions', 'local' ),
-			'desc'     => __( 'Default: 6', 'local' ),
-			'subtitle' => __( 'Insert the number of posts', 'local' ),
-			'default'  => '6',
-		),
-		array(
-			'id'       => 'opt-pagination-hotels',
-			'type'     => 'text',
-			'title'    => __( 'Hotels', 'local' ),
-			'desc'     => __( 'Default: 6', 'local' ),
-			'subtitle' => __( 'Insert the number of posts', 'local' ),
-			'default'  => '6',
-		),
-		array(
-			'id'       => 'opt-pagination-rooms',
-			'type'     => 'text',
-			'title'    => __( 'Rooms', 'local' ),
-			'desc'     => __( 'Default: 6', 'local' ),
-			'subtitle' => __( 'Insert the number of posts', 'local' ),
-			'default'  => '6',
-		),
-		array(
-			'id'       => 'opt-pagination-car-rentals',
-			'type'     => 'text',
-			'title'    => __( 'Car rentals', 'local' ),
-			'desc'     => __( 'Default: 6', 'local' ),
-			'subtitle' => __( 'Insert the number of posts', 'local' ),
-			'default'  => '6',
-		),
-		array(
-			'id'       => 'opt-pagination-news',
-			'type'     => 'text',
-			'title'    => __( 'News', 'local' ),
-			'desc'     => __( 'Default: 7', 'local' ),
-			'subtitle' => __( 'Insert the number of posts', 'local' ),
-			'default'  => '7',
-		),
-		array(
-			'id'       => 'opt-pagination-reviews',
-			'type'     => 'text',
-			'title'    => __( 'Reviews', 'local' ),
-			'desc'     => __( 'Default: 6', 'local' ),
-			'subtitle' => __( 'Insert the number of posts', 'local' ),
-			'default'  => '6',
-		),
-	)
-) );
-
-Redux::setSection( $opt_name, array(
 	'title'  => __( 'Header', 'local' ),
 	'id'     => 'opt-header',
 	'desc'   => __( 'Insert details.', 'local' ),
 	'icon'   => 'el el-flag',
 	'fields' => array(
 		array(
-			'id'       => 'opt-header-phone-text',
-			'type'     => 'text',
+			'id'       => 'opt-header-type',
 			'title'    => __( 'Text', 'local' ),
-			'subtitle' => __( 'Insert the text', 'local' )
-		),
-		array(
-			'id'       => 'opt-header-phone-number-first-part',
-			'type'     => 'text',
-			'title'    => __( 'Phone number (first part)', 'local' ),
-			'subtitle' => __( 'Insert th numbers', 'local' )
-		),
-		array(
-			'id'       => 'opt-header-phone-number-second-part',
-			'type'     => 'text',
-			'title'    => __( 'Phone number (second part)', 'local' ),
-			'subtitle' => __( 'Insert th numbers', 'local' )
+			'subtitle' => __( 'Insert the text', 'local' ),
+			'type'     => 'select',
+			'options'  => array(
+				'0' => __( 'Style 0', 'local' ),
+				'1' => __( 'Style 1', 'local' ),
+				'2' => __( 'Style 2', 'local' )
+			)
 		),
 	)
 ) );

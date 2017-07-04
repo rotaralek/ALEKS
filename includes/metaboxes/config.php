@@ -53,14 +53,14 @@ function tell_register_meta_boxes( $meta_boxes ) {
 		),
 		'fields'     => array(
 			array(
-				'name' => __( 'Slider', 'local' ),
+				'name' => __( 'Sidebar', 'local' ),
 				'id'   => $prefix . 'page_home_slider',
 				'type' => 'heading'
 			),
 			array(
-				'name'    => __( 'Show this block?', 'local' ),
-				'desc'    => __( 'Select "Hide" to remove this block from page', 'local' ),
-				'id'      => $prefix . 'page_home_slider_display',
+				'name'    => __( 'Show sidebar?', 'local' ),
+				'desc'    => __( 'Select "Hide" to remove this sidebar from page', 'local' ),
+				'id'      => $prefix . 'page_home_sidebar',
 				'type'    => 'select',
 				'options' => array(
 					'show' => __( 'Show', 'local' ),
@@ -68,11 +68,30 @@ function tell_register_meta_boxes( $meta_boxes ) {
 				)
 			),
 			array(
-				'name' => __( 'Number of posts', 'local' ),
-				'desc' => __( 'Insert the number of posts. Default: 6', 'local' ),
-				'id'   => $prefix . 'page_home_slider_number',
-				'type' => 'number',
-				'std'  => '6'
+				'name'    => __( 'Sidebar position', 'local' ),
+				'desc'    => __( 'Select position of sidebar', 'local' ),
+				'id'      => $prefix . 'page_home_sidebar_position',
+				'type'    => 'select',
+				'options' => array(
+					'right' => __( 'Right', 'local' ),
+					'left'  => __( 'Left', 'local' )
+				)
+			),
+			array(
+				'name' => __( 'Posts', 'local' ),
+				'id'   => $prefix . 'page_home_posts',
+				'type' => 'heading'
+			),
+			array(
+				'name'    => __( 'Cols', 'local' ),
+				'desc'    => __( 'Select number of cols', 'local' ),
+				'id'      => $prefix . 'page_home_posts_cols',
+				'type'    => 'select',
+				'options' => array(
+					'1' => 1,
+					'2' => 2,
+					'3' => 3
+				)
 			),
 		)
 	);
