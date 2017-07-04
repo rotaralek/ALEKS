@@ -6,7 +6,7 @@
  */
 function tell_get_post_types() {
 	return array(
-		/*'tours'       => array(
+		'portfolio'       => array(
 			'config'   => array(
 				'public'            => true,
 				'menu_position'     => 41,
@@ -23,11 +23,11 @@ function tell_get_post_types() {
 				'taxonomies'        => array( 'post_tag' ),
 				'menu_icon'         => 'dashicons-palmtree'
 			),
-			'singular' => __( 'Tour', 'local' ),
-			'multiple' => __( 'Tours', 'local' ),
+			'singular' => __( 'Portfolio', 'local' ),
+			'multiple' => __( 'Portfolio', 'local' ),
 			'columns'  => array(
 				'first_image',
 			)
-		),*/
+		),
 	);
 }
