@@ -1,0 +1,108 @@
+@import 'main';
+
+@media (max-width: 1920px) {
+}
+
+@media (max-width: 1600px) {
+}
+
+@media (max-width: 1366px) {
+}
+
+@media (max-width: 1280px) {
+}
+
+@media (max-width: 1024px) {
+	header .full-menu {
+		display: none;
+	}
+	header .mobile-menu {
+		display: block;
+	}
+	.page-home-news .background-image {
+		background-image: none !important;
+	}
+}
+
+@media (max-width: 768px) {
+	.template-home-slider .item .text h2, .template-article-slider .item .text h2 {
+		font-size: 4em;
+	}
+	.woocommerce ul.products li.product, .woocommerce-page ul.products li.product {
+		width: 50%;
+	}
+}
+
+@media (max-width: 650px) {
+	.multi-tabs .nav-container nav a {
+		font-size: 1.5em;
+	}
+	.template-home-slider {
+		.item .all-offers {
+			display: none;
+		}
+		.owl-nav, .owl-dots {
+			display: none;
+		}
+	}
+	.template-article-slider {
+		.item .country-flag {
+			display: none;
+		}
+		.owl-nav, .owl-dots {
+			display: none;
+		}
+	}
+}
+
+@media (max-width: 480px) {
+	header .top-line {
+		.phone-block {
+			float: none;
+			position: relative;
+			margin-right: -15px;
+			margin-left: -15px;
+		}
+		.social-block {
+			float: none;
+		}
+	}
+	.woocommerce ul.products li.product, .woocommerce-page ul.products li.product, .woocommerce .related ul.products li.product {
+		width: 100%;
+	}
+	.multi-tabs .nav-container nav {
+		display: block;
+		a {
+			display: inline-block;
+			float: none;
+			@include border-radius(10px);
+			margin: 7.5px;
+			&:first-of-type, &:last-of-type {
+				@include border-radius(10px);
+			}
+			&.active {
+				@include border-radius(10px);
+				padding: 0.7em 1.5em;
+				margin: 7.5px;
+			}
+		}
+	}
+	.template-home-slider .owl-dots {
+		display: none;
+	}
+	.template-home-slider .item .all-offers, .template-article-slider .tell-slider .active .item .country-flag {
+		display: none;
+	}
+	.template-home-slider .item .text h2, .template-article-slider .item .text h2 {
+		font-size: 3em;
+	}
+	.template-article-slider .item .text .rating {
+		font-size: 2em;
+	}
+	.template-article-slider .item .text p {
+		font-size: 1.5em;
+	}
+}
+
+@media (max-width: 320px) {
+}

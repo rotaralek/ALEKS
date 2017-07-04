@@ -1,0 +1,221 @@
+@import 'mixins';
+
+$white: #ffffff;
+.white-col{
+	color: $white;
+}
+.white-bg{
+	background-color: $white;
+}
+.white-col-hover{
+	@include transition();
+	&:hover,&:active,&:focus {
+		color: $white;
+	}
+}
+.white-bg-hover{
+	@include transition();
+	&:hover,&:active,&:focus {
+		background-color: $white;
+	}
+}
+
+$black: #000000;
+.black-col{
+	color: $black;
+}
+.black-bg{
+	background-color: $black;
+}
+.black-col-hover{
+	@include transition();
+	&:hover,&:active,&:focus {
+		color: $black;
+	}
+}
+.black-bg-hover{
+	@include transition();
+	&:hover,&:active,&:focus {
+		background-color: $black;
+	}
+}
+
+$red: #F44336;
+.red-col{
+	color: $red;
+}
+.red-bg{
+	background-color: $red;
+}
+.red-col-hover{
+	@include transition();
+	&:hover,&:active,&:focus {
+		color: $red;
+	}
+}
+.red-bg-hover{
+	@include transition();
+	&:hover,&:active,&:focus {
+		background-color: $red;
+	}
+}
+
+$blue: #2196F3;
+.blue-col{
+	color: $blue;
+}
+.blue-bg{
+	background-color: $blue;
+}
+.blue-col-hover{
+	@include transition();
+	&:hover,&:active,&:focus {
+		color: $blue;
+	}
+}
+.blue-bg-hover{
+	@include transition();
+	&:hover,&:active,&:focus {
+		background-color: $blue;
+	}
+}
+
+$blue-light: #64B5F6;
+.blue-light-col{
+	color: $blue-light;
+}
+.blue-light-bg{
+	background-color: $blue-light;
+}
+.blue-light-col-hover{
+	@include transition();
+	&:hover,&:active,&:focus {
+		color: $blue-light;
+	}
+}
+.blue-light-bg-hover{
+	@include transition();
+	&:hover,&:active,&:focus {
+		background-color: $blue-light;
+	}
+}
+
+$yellow: #FFEB3B;
+.yellow-col{
+	color: $yellow;
+}
+.yellow-bg{
+	background-color: $yellow;
+}
+.yellow-col-hover{
+	@include transition();
+	&:hover,&:active,&:focus {
+		color: $yellow;
+	}
+}
+.yellow-bg-hover{
+	@include transition();
+	&:hover,&:active,&:focus {
+		background-color: $yellow;
+	}
+}
+
+$orange: #FF9800;
+.orange-col{
+	color: $orange;
+}
+.orange-bg{
+	background-color: $orange;
+}
+.orange-col-hover{
+	@include transition();
+	&:hover,&:active,&:focus {
+		color: $orange;
+	}
+}
+.orange-bg-hover{
+	@include transition();
+	&:hover,&:active,&:focus {
+		background-color: $orange;
+	}
+}
+
+$purple: #a86fcc;
+.purple-col{
+	color: $purple;
+}
+.purple-bg{
+	background-color: $purple;
+}
+.purple-col-hover{
+	@include transition();
+	&:hover,&:active,&:focus {
+		color: $purple;
+	}
+}
+.purple-bg-hover{
+	@include transition();
+	&:hover,&:active,&:focus {
+		background-color: $purple;
+	}
+}
+
+$grey-light: #f4f4f4;
+.grey-light-col{
+	color: $grey-light;
+}
+.grey-light-bg{
+	background-color: $grey-light;
+}
+.grey-light-col-hover{
+	@include transition();
+	&:hover,&:active,&:focus {
+		color: $grey-light;
+	}
+}
+.grey-light-bg-hover{
+	@include transition();
+	&:hover,&:active,&:focus {
+		background-color: $grey-light;
+	}
+}
+
+$grey: #bfc4ce;
+.grey-col{
+	color: $grey;
+}
+.grey-bg{
+	background-color: $grey;
+}
+.grey-col-hover{
+	@include transition();
+	&:hover,&:active,&:focus {
+		color: $grey;
+	}
+}
+.grey-bg-hover{
+	@include transition();
+	&:hover,&:active,&:focus {
+		background-color: $grey;
+	}
+}
+
+$green-light: #2cde14;
+.green-light-col{
+	color: $green-light;
+}
+.green-light-bg{
+	background-color: $green-light;
+}
+.green-light-col-hover{
+	@include transition();
+	&:hover,&:active,&:focus {
+		color: $green-light;
+	}
+}
+.green-light-bg-hover{
+	@include transition();
+	&:hover,&:active,&:focus {
+		background-color: $green-light;
+	}
+}

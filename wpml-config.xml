@@ -1,0 +1,243 @@
+<wpml-config>
+    <custom-fields>
+        <custom-field action="ignore">tell_post_gallery</custom-field>
+        <custom-field action="ignore">tell_post_views</custom-field>
+        <custom-field action="copy">tell_slider_home_show</custom-field>
+        <custom-field action="ignore">tell_post_stars</custom-field>
+        <custom-field action="translate">tell_tours_length</custom-field>
+        <custom-field action="ignore">tell_post_date_begin</custom-field>
+        <custom-field action="ignore">tell_post_date_end</custom-field>
+        <custom-field action="ignore">tell_post_price</custom-field>
+        <custom-field action="translate">tell_tours_short_text</custom-field>
+        <custom-field action="ignore">tell_tours_top_offer</custom-field>
+        <custom-field action="translate">tell_excursions_length</custom-field>
+        <custom-field action="translate">tell_excursions_short_text</custom-field>
+        <custom-field action="translate">tell_cruises_departs</custom-field>
+        <custom-field action="translate">tell_cruises_ship</custom-field>
+        <custom-field action="translate">tell_cruises_destination</custom-field>
+        <custom-field action="translate">tell_cruises_duration</custom-field>
+        <custom-field action="translate">tell_cruises_ports_of_call</custom-field>
+        <custom-field action="translate">tell_cruises_short_text</custom-field>
+        <custom-field action="translate">tell_hotels_location</custom-field>
+        <custom-field action="ignore">tell_hotels_free_wifi</custom-field>
+        <custom-field action="ignore">tell_hotels_free_parking</custom-field>
+        <custom-field action="ignore">tell_hotels_garden</custom-field>
+        <custom-field action="ignore">tell_hotels_air_conditioning</custom-field>
+        <custom-field action="ignore">tell_hotels_sauna</custom-field>
+        <custom-field action="ignore">tell_hotels_patio</custom-field>
+        <custom-field action="ignore">tell_hotels_terrace</custom-field>
+        <custom-field action="ignore">tell_hotels_private_pool</custom-field>
+        <custom-field action="ignore">tell_hotels_restaurant</custom-field>
+        <custom-field action="ignore">tell_rooms_hotel</custom-field>
+        <custom-field action="copy">tell_rooms_size</custom-field>
+        <custom-field action="copy">tell_rooms_guests</custom-field>
+        <custom-field action="translate">tell_rooms_entertainment</custom-field>
+        <custom-field action="translate">tell_rooms_food_rink</custom-field>
+        <custom-field action="translate">tell_rooms_sleep</custom-field>
+        <custom-field action="translate">tell_rooms_bathroom</custom-field>
+        <custom-field action="translate">tell_rooms_practical</custom-field>
+        <custom-field action="translate">tell_rooms_comfort</custom-field>
+        <custom-field action="translate">tell_rooms_details</custom-field>
+        <custom-field action="translate">tell_car_rentals_location</custom-field>
+        <custom-field action="ignore">tell_car_rentals_air_conditioned</custom-field>
+        <custom-field action="ignore">tell_reviews_posts</custom-field>
+        <custom-field action="ignore">tell_page_home_slider</custom-field>
+        <custom-field action="ignore">page_home_slider_display</custom-field>
+        <custom-field action="ignore">tell_page_home_slider_number</custom-field>
+        <custom-field action="ignore">tell_page_home_filter</custom-field>
+        <custom-field action="ignore">tell_page_home_filter_display</custom-field>
+        <custom-field action="ignore">tell_page_home_filter_price</custom-field>
+        <custom-field action="ignore">tell_page_home_filter_travels_show</custom-field>
+        <custom-field action="ignore">tell_page_home_filter_hotels_show</custom-field>
+        <custom-field action="ignore">tell_page_home_filter_rooms_show</custom-field>
+        <custom-field action="ignore">tell_page_home_filter_car_rentals_show</custom-field>
+        <custom-field action="ignore">tell_page_home_post_type_base</custom-field>
+        <custom-field action="ignore">tell_page_home_post_type</custom-field>
+        <custom-field action="ignore">tell_page_home_post_type_number</custom-field>
+        <custom-field action="ignore">tell_page_home_information</custom-field>
+        <custom-field action="ignore">tell_page_home_information_display</custom-field>
+        <custom-field action="translate">tell_page_home_information_title</custom-field>
+        <custom-field action="translate">tell_page_home_information_description</custom-field>
+        <custom-field action="ignore">tell_page_home_partners_item_1_icon</custom-field>
+        <custom-field action="translate">tell_page_home_partners_item_1_title</custom-field>
+        <custom-field action="translate">tell_page_home_partners_item_1_text</custom-field>
+        <custom-field action="ignore">tell_page_home_partners_item_2_icon</custom-field>
+        <custom-field action="translate">tell_page_home_partners_item_2_title</custom-field>
+        <custom-field action="translate">tell_page_home_partners_item_2_text</custom-field>
+        <custom-field action="ignore">tell_page_home_partners_item_3_icon</custom-field>
+        <custom-field action="translate">tell_page_home_partners_item_3_title</custom-field>
+        <custom-field action="translate">tell_page_home_partners_item_3_text</custom-field>
+        <custom-field action="ignore">tell_page_home_partners_item_4_icon</custom-field>
+        <custom-field action="translate">tell_page_home_partners_item_4_title</custom-field>
+        <custom-field action="translate">tell_page_home_partners_item_4_text</custom-field>
+        <custom-field action="ignore">tell_page_home_partners_item_5_icon</custom-field>
+        <custom-field action="translate">tell_page_home_partners_item_5_title</custom-field>
+        <custom-field action="translate">tell_page_home_partners_item_5_text</custom-field>
+        <custom-field action="ignore">tell_page_home_partners_item_6_icon</custom-field>
+        <custom-field action="translate">tell_page_home_partners_item_6_title</custom-field>
+        <custom-field action="translate">tell_page_home_partners_item_6_text</custom-field>
+        <custom-field action="ignore">tell_page_home_news</custom-field>
+        <custom-field action="ignore">tell_page_home_news_display</custom-field>
+        <custom-field action="translate">tell_page_home_news_title</custom-field>
+        <custom-field action="ignore">tell_page_home_news_bg_image</custom-field>
+        <custom-field action="ignore">tell_page_home_product</custom-field>
+        <custom-field action="ignore">tell_page_home_product_display</custom-field>
+        <custom-field action="translate">tell_page_home_product_title</custom-field>
+        <custom-field action="ignore">tell_page_home_product_number</custom-field>
+        <custom-field action="ignore">tell_page_home_partners</custom-field>
+        <custom-field action="ignore">tell_page_home_partners_display</custom-field>
+        <custom-field action="translate">tell_page_home_partners_title</custom-field>
+        <custom-field action="translate">tell_template_contact_country</custom-field>
+        <custom-field action="translate">tell_template_contact_address</custom-field>
+        <custom-field action="copy">tell_template_contact_phone</custom-field>
+        <custom-field action="copy">tell_template_contact_email</custom-field>
+        <custom-field action="translate">tell_template_contact_form_title</custom-field>
+        <custom-field action="translate">tell_template_contact_form_text</custom-field>
+        <custom-field action="ignore">tell_template_contact_api_key</custom-field>
+        <custom-field action="copy">tell_partners_url</custom-field>
+    </custom-fields>
+    <custom-types>
+        <custom-type translate="1">tours</custom-type>
+        <custom-type translate="1">excursions</custom-type>
+        <custom-type translate="1">cruises</custom-type>
+        <custom-type translate="1">hotels</custom-type>
+        <custom-type translate="1">rooms</custom-type>
+        <custom-type translate="1">car-rentals</custom-type>
+        <custom-type translate="1">news</custom-type>
+        <custom-type translate="1">reviews</custom-type>
+        <custom-type translate="1">partners</custom-type>
+    </custom-types>
+    <taxonomies>
+        <taxonomy translate="1">tours-country</taxonomy>
+        <taxonomy translate="1">excursions-country</taxonomy>
+        <taxonomy translate="1">cruises-country</taxonomy>
+        <taxonomy translate="1">hotels-country</taxonomy>
+        <taxonomy translate="1">car-rentals-country</taxonomy>
+        <taxonomy translate="1">body-type</taxonomy>
+        <taxonomy translate="1">seats</taxonomy>
+        <taxonomy translate="1">doors</taxonomy>
+        <taxonomy translate="1">trunk</taxonomy>
+        <taxonomy translate="1">transmission</taxonomy>
+        <taxonomy translate="1">room-type</taxonomy>
+    </taxonomies>
+    <admin-texts>
+        <key name="theme_options">
+            <key name="opt-logo">
+                <key name="opt-logo-image"/>
+            </key>
+            <key name="opt-favicon">
+                <key name="opt-favicon-image"/>
+            </key>
+            <key name="opt-colors">
+                <key name="opt-color"/>
+                <key name="opt-change-red-col"/>
+                <key name="opt-change-blue-col"/>
+                <key name="opt-change-blue-light-col"/>
+                <key name="opt-change-yellow-col"/>
+                <key name="opt-change-orange-col"/>
+            </key>
+            <key name="opt-lazy-load">
+                <key name="opt-lazy-load-init"/>
+                <key name="opt-thumbnail"/>
+            </key>
+            <key name="opt-typography">
+                <key name="opt-typography-body"/>
+                <key name="opt-typography-menu"/>
+                <key name="opt-typography-title"/>
+                <key name="opt-typography-h1"/>
+                <key name="opt-typography-h2"/>
+                <key name="opt-typography-h3"/>
+                <key name="opt-typography-h4"/>
+                <key name="opt-typography-h5"/>
+                <key name="opt-typography-h6"/>
+            </key>
+            <key name="opt-top-image">
+                <key name="opt-top-image-tours"/>
+                <key name="opt-top-image-excursions"/>
+                <key name="opt-top-image-cruises"/>
+                <key name="opt-top-image-hotels"/>
+                <key name="opt-top-image-rooms"/>
+                <key name="opt-top-image-car-rentals"/>
+                <key name="opt-top-image-news"/>
+                <key name="opt-top-image-reviews"/>
+                <key name="opt-top-image-blog"/>
+                <key name="opt-top-image-page"/>
+            </key>
+            <key name="opt-currency-header">
+                <key name="opt-currency"/>
+            </key>
+            <key name="opt-information">
+                <key name="opt-information-show"/>
+                <key name="opt-information-text-begin"/>
+                <key name="opt-information-number-begin"/>
+                <key name="opt-information-number-end"/>
+                <key name="opt-information-text-end"/>
+            </key>
+            <key name="opt-spinners">
+                <key name="opt-spinner-use"/>
+                <key name="opt-spinner-layout"/>
+            </key>
+            <key name="opt-pagination">
+                <key name="opt-pagination-tours"/>
+                <key name="opt-pagination-cruises"/>
+                <key name="opt-pagination-excursions"/>
+                <key name="opt-pagination-hotels"/>
+                <key name="opt-pagination-rooms"/>
+                <key name="opt-pagination-car-rentals"/>
+                <key name="opt-pagination-news"/>
+                <key name="opt-pagination-reviews"/>
+            </key>
+            <key name="opt-header">
+                <key name="opt-header-phone-text"/>
+                <key name="opt-header-phone-number-first-part"/>
+                <key name="opt-header-phone-number-second-part"/>
+            </key>
+            <key name="opt-footer"/>
+            <key name="opt-footer-about">
+                <key name="opt-footer-about-title"/>
+                <key name="opt-footer-about-text"/>
+            </key>
+            <key name="opt-footer-tags">
+                <key name="opt-footer-tags-title"/>
+            </key>
+            <key name="opt-footer-copyright">
+                <key name="opt-footer-copyright-text"/>
+            </key>
+        </key>
+    </admin-texts>
+    <language-switcher-settings>
+        <key name="icl_lang_sel_config">
+            <key name="font-current-normal">#444444</key>
+            <key name="font-current-hover">#000000</key>
+            <key name="background-current-normal">#ffffff</key>
+            <key name="background-current-hover">#eeeeee</key>
+            <key name="font-other-normal">#444444</key>
+            <key name="font-other-hover">#000000</key>
+            <key name="background-other-normal">#ffffff</key>
+            <key name="background-other-hover">#eeeeee</key>
+            <key name="border">#cdcdcd</key>
+        </key>
+        <key name="icl_lang_sel_footer_config">
+            <key name="font-current-normal">#444444</key>
+            <key name="font-current-hover">#000000</key>
+            <key name="background-current-normal">#ffffff</key>
+            <key name="background-current-hover">#eeeeee</key>
+            <key name="font-other-normal">#444444</key>
+            <key name="font-other-hover">#000000</key>
+            <key name="background-other-normal">#ffffff</key>
+            <key name="background-other-hover">#eeeeee</key>
+            <key name="border">#cdcdcd</key>
+        </key>
+        <key name="icl_language_switcher_sidebar">0</key>
+        <key name="icl_widget_title_show">0</key>
+        <key name="icl_lang_sel_type">dropdown</key>
+        <key name="icl_lso_link_empty">0</key>
+        <key name="icl_lso_flags">0</key>
+        <key name="icl_lso_native_lang">1</key>
+        <key name="icl_lso_display_lang">1</key>
+        <key name="icl_lang_sel_footer">0</key>
+        <key name="icl_post_availability">0</key>
+        <key name="icl_post_availability_position">below</key>
+        <key name="icl_post_availability_text">This post is also available in: %s</key>
+    </language-switcher-settings>
+</wpml-config>
