@@ -583,8 +583,3 @@ hr {
     width: 8.33333333%;
   }
 }
-.flex-box {
-  display: flex;
-  width: 100%;
-  flex-wrap: wrap;
-}
