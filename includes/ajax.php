@@ -12,22 +12,26 @@ function load_posts() {
 	$post_type       = $_POST[ 'postType' ];
 	$number_of_posts = $_POST[ 'numberOfPosts' ];
 	$offset          = $_POST[ 'offset' ];
+	$taxonomy        = $_POST[ 'taxonomy' ];
 	$category        = $_POST[ 'category' ];
 	$tags            = $_POST[ 'tags' ];
-	$date            = $_POST[ 'date' ];
-	$stars           = $_POST[ 'stars' ];
-	$price           = $_POST[ 'price' ];
-	$room_type       = $_POST[ 'roomType' ];
 	$search          = $_POST[ 'search' ];
+	$price           = $_POST[ 'price' ];
+	$gender          = $_POST[ 'gender' ];
+	$order_by        = $_POST[ 'orderBy' ];
+	$user_id         = $_POST[ 'userId' ];
 	if ( preg_match( '/,/', $post_type ) ) {
 		$post_type = explode( ',', $post_type );
 	}
-	if ( !empty( $price ) ) {
+	if ( preg_match( '/,/', $taxonomy ) ) {
+		$taxonomy = explode( ',', $taxonomy );
+	}
+	if ( preg_match( '/,/', $category ) ) {
+		$category = explode( ',', $category );
+	}
+	if ( preg_match( '/-/', $price ) ) {
 		$price = explode( '-', $price );
 	}
-	$city         = $_POST[ 'city' ];
-	$body_type    = $_POST[ 'bodyType' ];
-	$transmission = $_POST[ 'transmission' ];
 
 	$GLOBALS[ 'counter' ] = $offset;
 
@@ -42,11 +46,27 @@ function load_posts() {
 
 	//Checking
 	if ( !empty( $category ) ) {
-		$tax_array[] = array(
-			'taxonomy' => $post_type . '-country',
-			'field'    => 'slug',
-			'terms'    => $category
-		);
+		if ( !is_array( $category ) ) {
+			$tax_array = array(
+				'relation' => 'OR',
+			);
+		}
+
+		if ( is_array( $taxonomy ) ) {
+			foreach ( $taxonomy as $tax ) {
+				$tax_array[] = array(
+					'taxonomy' => $tax,
+					'field'    => 'id',
+					'terms'    => $category
+				);
+			}
+		} else {
+			$tax_array[] = array(
+				'taxonomy' => $taxonomy,
+				'field'    => 'id',
+				'terms'    => $category
+			);
+		}
 	}
 	if ( !empty( $tags ) ) {
 		$tax_array[] = array(
@@ -55,54 +75,53 @@ function load_posts() {
 			'terms'    => $tags
 		);
 	}
-	if ( !empty( $city ) ) {
-		$tax_array[] = array(
-			'taxonomy' => $post_type . '-country',
-			'field'    => 'slug',
-			'terms'    => $city
-		);
-	}
-	if ( !empty( $room_type ) ) {
-		$tax_array[] = array(
-			'taxonomy' => 'room-type',
-			'field'    => 'slug',
-			'terms'    => $room_type
-		);
-	}
-	if ( !empty( $body_type ) ) {
-		$tax_array[] = array(
-			'taxonomy' => 'body-type',
-			'field'    => 'slug',
-			'terms'    => $body_type
-		);
-	}
-	if ( !empty( $transmission ) ) {
-		$tax_array[] = array(
-			'taxonomy' => 'transmission',
-			'field'    => 'slug',
-			'terms'    => $transmission
-		);
-	}
-	if ( !empty( $date ) ) {
-		$meta_array[] = array(
-			'key'     => 'tell_post_date',
-			'value'   => $date,
-			'compare' => '='
-		);
-	}
-	if ( !empty( $stars ) ) {
-		$meta_array[] = array(
-			'key'     => 'tell_post_stars',
-			'value'   => $stars,
-			'compare' => '='
-		);
-	}
 	if ( !empty( $price ) ) {
 		$meta_array[] = array(
-			'key'     => 'tell_post_price',
-			'value'   => array( intval( $price[ 0 ] ), intval( $price[ 1 ] ) ),
-			'compare' => 'BETWEEN',
-			'type'    => 'numeric'
+			'relation' => 'OR',
+			array(
+				'key'     => 'tell_experts_minimal_price',
+				'value'   => array( intval( $price[ 0 ] ), intval( $price[ 1 ] ) ),
+				'compare' => 'BETWEEN',
+				'type'    => 'numeric'
+			),
+			array(
+				'key'     => 'tell_experts_maximal_price',
+				'value'   => array( intval( $price[ 0 ] ), intval( $price[ 1 ] ) ),
+				'compare' => 'BETWEEN',
+				'type'    => 'numeric'
+			),
+			array(
+				'relation' => 'AND',
+				array(
+					'key'     => 'tell_experts_minimal_price',
+					'value'   => intval( $price[ 0 ] ),
+					'compare' => '<=',
+					'type'    => 'numeric'
+				),
+				array(
+					'key'     => 'tell_experts_maximal_price',
+					'value'   => intval( $price[ 1 ] ),
+					'compare' => '>=',
+					'type'    => 'numeric'
+				)
+			)
+		);
+	}
+
+	if ( !empty( $gender ) ) {
+		$meta_array[] = array(
+			array(
+				'key'     => 'tell_experts_gender',
+				'value'   => $gender,
+				'compare' => '='
+			)
+		);
+	}
+
+	if ( !empty( $user_id ) ) {
+		$meta_array[] = array(
+			'key'   => 'tell_users_id',
+			'value' => $user_id
 		);
 	}
 
@@ -120,6 +139,19 @@ function load_posts() {
 				's'              => $search
 			)
 		);
+	} elseif ( '' != $order_by ) {
+		$query = new WP_Query(
+			array(
+				'post_type'      => $post_type,
+				'posts_per_page' => $number_of_posts,
+				'offset'         => $offset,
+				'meta_query'     => $meta_array,
+				'tax_query'      => $tax_array,
+				'orderby'        => 'meta_value_num',
+				'meta_key'       => 'tell_views',
+				'order'          => 'DESC'
+			)
+		);
 	} else {
 		$query = new WP_Query(
 			array(
@@ -133,277 +165,20 @@ function load_posts() {
 	}
 
 	if ( $query->have_posts() ) : while ( $query->have_posts() ) : $query->the_post();
-		if ( 'tours' == $post->post_type ) {
-			get_template_part( 'partials/article/article', 'tours' );
-		} elseif ( 'excursions' == $post->post_type ) {
-			get_template_part( 'partials/article/article', 'excursions' );
-		} elseif ( 'cruises' == $post->post_type ) {
-			get_template_part( 'partials/article/article', 'cruises' );
-		} elseif ( 'hotels' == $post->post_type ) {
-			get_template_part( 'partials/article/article', 'hotels' );
-		} elseif ( 'rooms' == $post->post_type ) {
-			get_template_part( 'partials/article/article', 'rooms' );
-		} elseif ( 'car-rentals' == $post->post_type ) {
-			get_template_part( 'partials/article/article', 'car-rentals' );
+		if ( 'experts' == $post->post_type ) {
+			get_template_part( 'partials/article/experts' );
+		} elseif ( 'conference' == $post->post_type ) {
+			get_template_part( 'partials/article/conference' );
 		} elseif ( 'news' == $post->post_type ) {
-			get_template_part( 'partials/article/article', 'news' );
-		} elseif ( 'reviews' == $post->post_type ) {
-			get_template_part( 'partials/article/article', 'reviews' );
+			get_template_part( 'partials/article/news' );
+		} elseif ( 'video' == $post->post_type ) {
+			get_template_part( 'partials/article/video' );
 		} else {
-			get_template_part( 'partials/article/article', 'post' );
+			get_template_part( 'partials/article/post' );
 		}
-		$counter++;
 	endwhile; endif;
 	wp_reset_query();
 
-	exit();
-}
-
-add_action( 'tell_ajax_load_categories', 'load_categories' );
-add_action( 'tell_ajax_nopriv_load_categories', 'load_categories' );
-function load_categories() {
-	$nonce = $_POST[ 'nonce' ];
-	if ( !wp_verify_nonce( $nonce, 'ajax_admin-nonce' ) ) {
-		exit( 'Stop!' );
-	}
-
-	$post_type = $_POST[ 'postType' ]; ?>
-
-	<nav>
-		<?php $args = array(
-			'type'         => $post_type,
-			'child_of'     => 0,
-			'parent'       => 0,
-			'orderby'      => 'name',
-			'order'        => 'ASC',
-			'hide_empty'   => 1,
-			'hierarchical' => 1,
-			'exclude'      => '',
-			'include'      => '',
-			'number'       => '',
-			'taxonomy'     => $post_type . '-country',
-			'pad_counts'   => false );
-
-		$categories = get_categories( $args ); ?>
-		<ul>
-			<?php foreach ( $categories as $cat ) {
-				echo '<li><a href="' . home_url() . '/' . $post_type . '-country/' . $cat->slug . '" class="black-col red-col-hover" data-post-type="' . $post_type . '" data-category="' . $cat->slug . '">' . $cat->name . '</a></li>';
-			} ?>
-		</ul>
-	</nav>
-
-	<?php
-	exit();
-}
-
-
-add_action( 'tell_ajax_tell_get_country', 'tell_get_country' );
-add_action( 'tell_ajax_nopriv_tell_get_country', 'tell_get_country' );
-function tell_get_country() {
-	$nonce = $_POST[ 'nonce' ];
-	if ( !wp_verify_nonce( $nonce, 'ajax_admin-nonce' ) ) {
-		exit( 'Stop!' );
-	}
-
-	$post_type = $_POST[ 'postType' ];
-	$baseLabel = $_POST[ 'baseLabel' ];
-
-	$selectedItem = $_POST[ 'selectedItem' ];
-	$idObj        = get_term_by( 'slug', $selectedItem, 'country' );
-	$id           = $idObj->term_id;
-	$args         = array(
-		'type'         => $post_type,
-		'child_of'     => 0,
-		'parent'       => 0,
-		'orderby'      => 'name',
-		'order'        => 'ASC',
-		'hide_empty'   => 1,
-		'hierarchical' => 1,
-		'exclude'      => '',
-		'include'      => '',
-		'number'       => '',
-		'taxonomy'     => $post_type . '-country',
-		'pad_counts'   => false
-	);
-
-
-	$categories = get_categories( $args );
-	echo '<option value="" label>' . $baseLabel . '</option>';
-	foreach ( $categories as $cat ) {
-		echo '<option value="' . $cat->slug . '">' . $cat->name . '</option>';
-	}
-	exit();
-}
-
-add_action( 'tell_ajax_tell_get_child_country', 'tell_get_child_country' );
-add_action( 'tell_ajax_nopriv_tell_get_child_country', 'tell_get_child_country' );
-function tell_get_child_country() {
-	$nonce = $_POST[ 'nonce' ];
-	if ( !wp_verify_nonce( $nonce, 'ajax_admin-nonce' ) ) {
-		exit( 'Stop!' );
-	}
-
-	$post_type   = $_POST[ 'postType' ];
-	$baseLabel   = $_POST[ 'baseLabel' ];
-	$selectValue = $_POST[ 'selectValue' ];
-
-	$idObj = get_term_by( 'slug', $selectValue, $post_type . '-country' );
-	$id    = $idObj->term_id;
-	$args  = array(
-		'type'         => $post_type,
-		'child_of'     => 0,
-		'parent'       => $id,
-		'orderby'      => 'name',
-		'order'        => 'ASC',
-		'hide_empty'   => 1,
-		'hierarchical' => 1,
-		'exclude'      => '',
-		'include'      => '',
-		'number'       => '',
-		'taxonomy'     => $post_type . '-country',
-		'pad_counts'   => false
-	);
-
-
-	$categories = get_categories( $args );
-	echo '<option value="" label>' . $baseLabel . '</option>';
-	foreach ( $categories as $cat ) {
-		echo '<option value="' . $cat->slug . '">' . $cat->name . '</option>';
-	}
-	exit();
-}
-
-add_action( 'tell_ajax_reviews_create', 'reviews_create' );
-add_action( 'tell_ajax_nopriv_reviews_create', 'reviews_create' );
-function reviews_create() {
-	$nonce = $_POST[ 'nonce' ];
-	if ( !wp_verify_nonce( $nonce, 'ajax_admin-nonce' ) ) {
-		exit( 'Stop!' );
-	}
-	$all_fields = $_POST[ 'reviewFields' ];
-	$text       = $all_fields[ 0 ][ 'value' ];
-	$name       = $all_fields[ 1 ][ 'value' ];
-	$star       = $all_fields[ 2 ][ 'value' ];
-	$post_id    = $all_fields[ 3 ][ 'value' ];
-
-	if ( '' != $name && '' != $star && '' != $text && '' != $post_id ) {
-		$post_args = array(
-			'post_type'    => 'reviews',
-			'post_title'   => $name,
-			'post_author'  => 'review',
-			'post_content' => $text,
-			'post_excerpt' => '',
-			'post_status'  => 'publish'
-		);
-
-		// Create post
-		$created_post_id = wp_insert_post( $post_args );
-
-		update_post_meta( $created_post_id, 'tell_post_stars', $star );
-		add_post_meta( $created_post_id, 'tell_reviews_posts', $post_id );
-
-		echo '<p class="left green-light-col">' . __( 'Your review has been created. ', 'local' ) . '</p>';
-	} else {
-		echo '<p class="left white-col">' . __( 'Please fill in all fields.', 'local' ) . '</p>';
-	}
-
-	exit();
-}
-
-add_action( 'tell_ajax_reviews_posts', 'reviews_posts' );
-add_action( 'tell_ajax_nopriv_reviews_posts', 'reviews_posts' );
-function reviews_posts() {
-	$nonce = $_POST[ 'nonce' ];
-	if ( !wp_verify_nonce( $nonce, 'ajax_admin-nonce' ) ) {
-		exit( 'Stop!' );
-	}
-
-	$post_reviews_id = $_POST[ 'postId' ];
-	$query_reviews   = new WP_Query(
-		array(
-			'post_type'      => 'reviews',
-			'posts_per_page' => -1,
-			'meta_query'     => array(
-				array(
-					'key'     => 'tell_reviews_posts',
-					'value'   => $post_reviews_id,
-					'compare' => 'LIKE'
-				)
-			)
-		)
-	);
-	if ( $query_reviews->have_posts() ) : while ( $query_reviews->have_posts() ) : $query_reviews->the_post(); ?>
-		<div class="item margin-bottom-30 padding-bottom-30">
-			<h4 class="cf">
-				<?php the_title(); ?>
-
-				<?php if ( tell_get_meta( 'reviews_stars' ) ) { ?>
-					<span class="right rating">
-						<?php $number_of_stars = tell_get_meta( 'reviews_stars' );
-						for ( $i = 0; $i < $number_of_stars; $i++ ) { ?>
-							<i class="material-icons yellow-col">star_rate</i>
-						<?php } ?>
-					</span>
-				<?php } ?>
-			</h4>
-
-			<div class="string">
-				<?php the_content(); ?>
-			</div>
-		</div>
-	<?php endwhile; endif;
-	wp_reset_query();
-	exit();
-}
-
-add_action( 'tell_ajax_order_submit', 'order_submit' );
-add_action( 'tell_ajax_nopriv_order_submit', 'order_submit' );
-function order_submit() {
-	$nonce = $_POST[ 'nonce' ];
-	if ( !wp_verify_nonce( $nonce, 'ajax_admin-nonce' ) ) {
-		exit( 'Stop!' );
-	}
-	$order_item_id    = $_POST[ 'orderItemId' ];
-	$order_item_name  = $_POST[ 'orderItemName' ];
-	$order_name       = $_POST[ 'orderName' ];
-	$order_date_begin = $_POST[ 'orderDateBegin' ];
-	$order_date_end   = $_POST[ 'orderDateEnd' ];
-	$order_phone      = $_POST[ 'orderPhone' ];
-	$order_email      = $_POST[ 'orderEmail' ];
-	$order_message    = $_POST[ 'orderMessage' ];
-
-
-	if ( '' != $order_item_id && '' != $order_item_name && '' != $order_name && '' != $order_date_begin && '' != $order_date_end && '' != $order_phone && '' != $order_email && '' != $order_message ) {
-		$message = '<p><b>' . __( 'Selected item:', 'local' ) . '</b> ' . $order_item_name . '</p>';
-		$message .= '<p><b>' . __( 'Selected item Link:', 'local' ) . '</b> <a href="' . get_the_permalink( $order_item_id ) . '">' . get_the_permalink( $order_item_id ) . '</a></p>';
-		$message .= '<p><b>' . __( 'Name:', 'local' ) . '</b> ' . $order_name . '</p>';
-		$message .= '<p><b>' . __( 'Date begin:', 'local' ) . '</b> ' . $order_date_begin . '</p>';
-		$message .= '<p><b>' . __( 'Date end:', 'local' ) . '</b> ' . $order_date_end . '</p>';
-		$message .= '<p><b>' . __( 'Phone:', 'local' ) . '</b> ' . $order_phone . '</p>';
-		$message .= '<p><b>' . __( 'Email:', 'local' ) . '</b> ' . $order_email . '</p>';
-		$message .= '<p><b>' . __( 'Message:', 'local' ) . '</b> ' . $order_message . '</p>';
-
-		//php mailer variables
-		$to      = get_option( 'admin_email' );
-		$subject = $order_name . ' sent a message from ' . get_bloginfo( 'name' );
-		$headers = 'From: ' . $order_email . ' Reply-To: ' . $order_email . "\r\n";
-		$headers .= "CC: " . get_option( 'admin_email' ) . "\r\n";
-		$headers .= "MIME-Version: 1.0\r\n";
-		$headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
-
-		if ( !filter_var( $order_email, FILTER_VALIDATE_EMAIL ) === false ) {
-			$sent = mail( $to, $subject, $message, $headers );
-			if ( $sent ) {
-				echo '<p class="green-light-col">' . __( 'Your order has been sent.', 'local' ) . '</p>';
-			} else {
-				echo '<p class="red-col">' . __( 'Something went wrong, try again later.', 'local' ) . '</p>';
-			}
-		} else {
-			echo '<p class="red-col">' . __( 'Wrong Email.', 'local' ) . '</p>';
-		}
-	} else {
-		echo '<p class="red-col">' . __( 'Please fill in all fields.', 'local' ) . '</p>';
-	}
 	exit();
 }
 
@@ -501,5 +276,377 @@ function contact_form_submit() {
 	} else {
 		echo '<p class="left red-col"><i class="ti-close"></i> ' . __( 'Please fill in all fields.', 'local' ) . '</p>';
 	}
+	exit();
+}
+
+//Login form
+add_action( 'tell_ajax_login_form', 'login_form' );
+add_action( 'tell_ajax_nopriv_login_form', 'login_form' );
+function login_form() { ?>
+	<form action="/wp-login.php" method="POST" class="cf login-form">
+		<h1 class="margin-bottom-15"><?php _e( 'Login', 'local' ); ?></h1>
+
+		<input type="text" name="log" placeholder="<?php _e( 'Login', 'local' ); ?>" maxlength="30" class="margin-bottom-15">
+		<input type="password" name="pwd" placeholder="<?php _e( 'Password', 'local' ); ?>" maxlength="30" class="margin-bottom-15">
+		<button type="submit" class="btn normal blue-bg white-col blue-light-bg-hover right"><?php _e( 'Login', 'local' ); ?></button>
+	</form>
+	<?php
+	exit();
+}
+
+//Registration form
+add_action( 'tell_ajax_registration_form', 'registration_form' );
+add_action( 'tell_ajax_nopriv_registration_form', 'registration_form' );
+function registration_form() { ?>
+	<form action="/wp-login.php?action=register" method="POST" class="cf registration-form">
+		<h1 class="margin-bottom-15"><?php _e( 'Registration', 'local' ); ?></h1>
+
+		<div class="registration-items">
+			<div class="slide-box cf">
+				<div class="item item-1 left active">
+					<div class="form-field margin-bottom-15">
+						<input type="text" name="first_name" placeholder="<?php _e( 'First name', 'local' ); ?> *" maxlength="30" required>
+					</div>
+
+					<div class="form-field margin-bottom-15">
+						<input type="text" name="middle_name" placeholder="<?php _e( 'Middle name', 'local' ); ?>" maxlength="30">
+					</div>
+
+					<div class="form-field margin-bottom-15">
+						<input type="text" name="last_name" placeholder="<?php _e( 'Last name', 'local' ); ?>" maxlength="30">
+					</div>
+
+					<div class="form-field margin-bottom-15">
+						<input type="text" name="birthday" placeholder="<?php _e( 'Birthday', 'local' ); ?> *" maxlength="30" required class="date-picker">
+					</div>
+
+					<div class="form-field margin-bottom-15">
+						<label>
+							<input type="radio" name="gender" value="male" required>
+							<span><?php _e( 'Male', 'local' ); ?> *</span>
+						</label>
+
+						<label>
+							<input type="radio" name="gender" value="female" required>
+							<span><?php _e( 'Female', 'local' ); ?> *</span>
+						</label>
+					</div>
+				</div>
+
+				<div class="item item-2 left">
+					<div class="form-field margin-bottom-15">
+						<input type="text" name="login" placeholder="<?php _e( 'Login', 'local' ); ?> *" maxlength="30" required>
+					</div>
+
+					<div class="form-field margin-bottom-15">
+						<input type="password" name="password" placeholder="<?php _e( 'Password', 'local' ); ?> *" maxlength="30" required>
+					</div>
+
+					<div class="form-field margin-bottom-15">
+						<input type="password" name="repeat_password" placeholder="<?php _e( 'Repeat password', 'local' ); ?> *" maxlength="30" required>
+					</div>
+				</div>
+
+				<div class="item item-3 left">
+					<div class="form-field margin-bottom-15">
+						<input type="email" name="email" placeholder="<?php _e( 'Email', 'local' ); ?> *" maxlength="30" required>
+					</div>
+
+					<div class="form-field margin-bottom-15">
+						<input type="tel" name="phone" placeholder="<?php _e( 'Phone', 'local' ); ?>" maxlength="60">
+					</div>
+
+					<div class="form-field margin-bottom-15">
+						<input type="text" name="address" placeholder="<?php _e( 'Address', 'local' ); ?>" maxlength="30">
+					</div>
+
+					<div class="form-field margin-bottom-15">
+						<input type="url" name="site" placeholder="<?php _e( 'Site', 'local' ); ?>" maxlength="30">
+					</div>
+				</div>
+
+				<div class="item item-4 left">
+					<div class="form-field margin-bottom-15">
+						<input type="url" name="google_plus" placeholder="<?php _e( 'Google+ profile url', 'local' ); ?>" maxlength="100">
+					</div>
+
+					<div class="form-field margin-bottom-15">
+						<input type="url" name="twitter" placeholder="<?php _e( 'Twitter profile url', 'local' ); ?>" maxlength="100">
+					</div>
+
+					<div class="form-field margin-bottom-15">
+						<input type="url" name="facebook" placeholder="<?php _e( 'Facebook profile url', 'local' ); ?>" maxlength="100">
+					</div>
+
+					<div class="form-field margin-bottom-15">
+						<input type="url" name="ok" placeholder="<?php _e( 'Ok profile url', 'local' ); ?>" maxlength="100">
+					</div>
+
+					<div class="form-field margin-bottom-15">
+						<input type="url" name="vk" placeholder="<?php _e( 'Vk profile url', 'local' ); ?>" maxlength="100">
+					</div>
+
+					<div class="form-field margin-bottom-15">
+						<input type="url" name="pinterest" placeholder="<?php _e( 'Pinterest profile url', 'local' ); ?>" maxlength="100">
+					</div>
+
+					<div class="form-field margin-bottom-15">
+						<input type="url" name="instagram" placeholder="<?php _e( 'Instagram profile url', 'local' ); ?>" maxlength="100">
+					</div>
+
+					<div class="form-field margin-bottom-15">
+						<input type="url" name="youtube" placeholder="<?php _e( 'Youtube profile url', 'local' ); ?>" maxlength="100">
+					</div>
+				</div>
+
+				<div class="item item-5 left">
+					<div class="form-field margin-bottom-15">
+						<textarea name="education" placeholder="<?php _e( 'Education', 'local' ); ?>" maxlength="10000"></textarea>
+					</div>
+
+					<div class="form-field margin-bottom-15">
+						<textarea name="work_experience" placeholder="<?php _e( 'Work experience', 'local' ); ?>" maxlength="10000"></textarea>
+					</div>
+				</div>
+
+				<div class="item item-6 left">
+					<div class="form-field margin-bottom-15">
+						<input type="number" name="min_price" placeholder="<?php _e( 'Minimum service price', 'local' ); ?>" maxlength="30">
+					</div>
+
+					<div class="form-field margin-bottom-15">
+						<input type="number" name="max_price" placeholder="<?php _e( 'Maximum service price', 'local' ); ?>" maxlength="30">
+					</div>
+
+					<div class="form-field margin-bottom-15">
+						<select name="currency_price">
+							<option value="mdl" selected>MDL</option>
+							<option value="usd">USD</option>
+							<option value="eur">EUR</option>
+						</select>
+					</div>
+				</div>
+
+				<div class="item item-7 left">
+					<div class="form-field margin-bottom-15">
+						<input type="text" name="profession" placeholder="<?php _e( 'Profession', 'local' ); ?> *" required>
+						<input type="hidden" name="profession_term_id">
+
+						<div class="options white-bg card-shadow hidden">
+							<div class="exit"></div>
+
+							<?php $args = array(
+								'type'         => 'experts',
+								'child_of'     => 0,
+								'parent'       => 0,
+								'orderby'      => 'name',
+								'order'        => 'ASC',
+								'hide_empty'   => 0,
+								'hierarchical' => 1,
+								'exclude'      => '',
+								'include'      => '',
+								'number'       => '',
+								'taxonomy'     => 'professions',
+								'pad_counts'   => false );
+
+							$categories = get_categories( $args ); ?>
+
+							<ul>
+								<?php foreach ( $categories as $category ) {
+									echo '<li><a href="' . home_url() . '/professions/' . $category->slug . '" data-term-id="' . $category->term_id . '" class="black-col red-col-hover">' . $category->name . '</a>';
+
+									$inner_cat = $category->term_id;
+									$args_in   = array(
+										'type'         => 'experts',
+										'child_of'     => 0,
+										'parent'       => $inner_cat,
+										'orderby'      => 'name',
+										'order'        => 'ASC',
+										'hide_empty'   => 0,
+										'hierarchical' => 1,
+										'exclude'      => '',
+										'include'      => '',
+										'number'       => '',
+										'taxonomy'     => 'professions',
+										'pad_counts'   => false
+									);
+
+									$categories_in = get_categories( $args_in );
+
+									if ( !empty( $categories_in ) ) {
+										echo '<ul>';
+
+										foreach ( $categories_in as $category_in ) {
+											echo '<li>';
+
+											echo '<a href="' . esc_url( home_url() ) . '/professions/' . $category_in->slug . '" data-term-id="' . $category_in->term_id . '" class="blue-col">' . $category_in->name . '</a>';
+
+											echo '</li>';
+										}
+
+										echo '</ul>';
+									}
+									echo '</li>';
+								} ?>
+							</ul>
+						</div>
+					</div>
+
+					<div class="expert-professions-form"></div>
+				</div>
+			</div>
+		</div>
+
+		<button type="button" class="btn normal blue-bg white-col blue-light-bg-hover left back hidden" data-counter="1"><?php _e( 'Back', 'local' ); ?></button>
+		<button type="button" class="btn normal blue-bg white-col blue-light-bg-hover right next" data-counter="1"><?php _e( 'Next', 'local' ); ?></button>
+		<button type="submit" class="btn normal blue-bg white-col blue-light-bg-hover right submit hidden"><?php _e( 'Register', 'local' ); ?></button>
+
+		<div class="response clear text-center"></div>
+	</form>
+	<?php
+	exit();
+}
+
+add_action( 'tell_ajax_registration', 'registration' );
+add_action( 'tell_ajax_nopriv_registration', 'registration' );
+function registration() {
+	$all_fields = $_POST[ 'allFields' ];
+
+	function response( $reload, $counter, $string ) {
+		$data              = array();
+		$data[ 'reload' ]  = $reload;
+		$data[ 'counter' ] = $counter;
+		if ( 1 == $reload ) {
+			$data[ 'string' ] = '<p class="blue-col padding-top-30">' . $string . '</p>';
+		} else {
+			$data[ 'string' ] = '<p class="red-col padding-top-30">' . $string . '</p>';
+		}
+
+		echo json_encode( $data );
+	}
+
+	if ( !is_array( $all_fields ) || empty( $all_fields ) ) {
+		exit();
+	}
+
+	foreach ( $all_fields as $field ) {
+		${$field[ 'name' ]} = $field[ 'value' ];
+	}
+
+	//Creating new user
+	if ( username_exists( $login ) ) {
+
+		response( 0, 2, __( 'A user with this login already exists', 'local' ) );
+
+		exit();
+	}
+
+	if ( $password != $repeat_password ) {
+		response( 0, 2, __( 'Passwords do not match', 'local' ) );
+
+		exit();
+	}
+
+	if ( !is_email( $email ) ) {
+		response( 0, 3, __( 'Wrong Email', 'local' ) );
+
+		exit();
+	}
+
+	if ( email_exists( $email ) ) {
+		response( 0, 3, __( 'A user with this email already exists', 'local' ) );
+
+		exit();
+	}
+
+	$user_data = array(
+		'first_name' => $first_name,
+		'last_name'  => $last_name,
+		'user_login' => $login,
+		'user_pass'  => $password,
+		'user_email' => $email,
+		'role'       => 'author'
+	);
+
+	$user_id = wp_insert_user( $user_data );
+
+	//Creating new user profile page
+	$title = $first_name;
+	if ( '' == $middle_name ) {
+		$title .= ' ' . $middle_name;
+	}
+	if ( '' == $last_name ) {
+		$title .= ' ' . $last_name;
+	}
+	$post_args = array(
+		'post_type'   => 'experts',
+		'post_title'  => $title,
+		'post_name'   => $login,
+		'post_status' => 'publish',
+		'post_date'   => date( 'Y-m-d' ) . ' ' . date( 'H:i' ) . ':00',
+		'post_author' => $user_id
+	);
+
+	// Create post
+	$created_post_id = wp_insert_post( $post_args );
+
+	//Add meta boxes
+	update_post_meta( $created_post_id, 'tell_users_id', $user_id );
+	update_post_meta( $created_post_id, 'tell_experts_first_name', $first_name );
+	update_post_meta( $created_post_id, 'tell_experts_middle_name', $middle_name );
+	update_post_meta( $created_post_id, 'tell_experts_last_name', $last_name );
+	update_post_meta( $created_post_id, 'tell_experts_birthday_date', $birthday );
+	update_post_meta( $created_post_id, 'tell_experts_gender', $gender );
+	update_post_meta( $created_post_id, 'tell_experts_contacts_number', $phone );
+	update_post_meta( $created_post_id, 'tell_experts_contacts_site', $site );
+	update_post_meta( $created_post_id, 'tell_experts_contacts_address', $address );
+	update_post_meta( $created_post_id, 'tell_experts_social_google_plus', $google_plus );
+	update_post_meta( $created_post_id, 'tell_experts_social_twitter', $twitter );
+	update_post_meta( $created_post_id, 'tell_experts_social_facebook', $facebook );
+	update_post_meta( $created_post_id, 'tell_experts_social_ok', $ok );
+	update_post_meta( $created_post_id, 'tell_experts_social_vk', $vk );
+	update_post_meta( $created_post_id, 'tell_experts_social_pinterest', $pinterest );
+	update_post_meta( $created_post_id, 'tell_experts_social_instagram', $instagram );
+	update_post_meta( $created_post_id, 'tell_experts_social_youtube', $youtube );
+	update_post_meta( $created_post_id, 'tell_experts_education_text', $education );
+	update_post_meta( $created_post_id, 'tell_experts_work_experience_text', $work_experience );
+	update_post_meta( $created_post_id, 'tell_experts_minimal_price', $min_price );
+	update_post_meta( $created_post_id, 'tell_experts_maximal_price', $max_price );
+	update_post_meta( $created_post_id, 'tell_experts_currency_price', $currency_price );
+	update_post_meta( $created_post_id, 'tell_expert_meta', array( 'expert_professions_select' => $profession_term_id ) );
+
+	$category = get_term( $profession_term_id, 'professions' );
+	if ( $category ) {
+		wp_set_post_terms( $created_post_id, array( $category->parent, $_POST[ 'profession_term_id' ] ), 'professions' );
+	} else {
+		wp_set_post_terms( $created_post_id, $_POST[ 'profession_term_id' ], 'professions' );
+	}
+
+	//Send mail to user
+	$message = '<p>' . __( 'Registration completed successfully.', 'local' ) . '</p>';
+	$message .= '<p>' . __( 'Login', 'local' ) . ': ' . $login . '</p>';
+	$message .= '<p>' . __( 'Password', 'local' ) . ': ' . $password . '</p>';
+
+	//php mailer variables
+	$from    = get_option( 'admin_email' );
+	$to      = $email;
+	$subject = __( 'Email sent from ', 'local' ) . get_bloginfo( 'name' );
+	$headers = 'From: ' . $from . ' Reply-To: ' . $from . "\r\n";
+	$headers .= "CC: " . $to . "\r\n";
+	$headers .= "MIME-Version: 1.0\r\n";
+	$headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
+
+	$sent = mail( $to, $subject, $message, $headers );
+	if ( !$sent ) {
+		response( 0, 3, __( 'Internal error', 'local' ) );
+
+		exit();
+	}
+
+
+	if ( $created_post_id ) {
+		response( 1, 7, __( 'Registration completed successfully! Check your email.', 'local' ) );
+	}
+
 	exit();
 }

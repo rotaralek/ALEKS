@@ -3,7 +3,7 @@ Blog theme (ALEKS  - Clean Blog & Portfolio WordPress Theme)
 http://azalea.elated-themes.com/landing
 Pages
 	Home page
-		http://preview.themeforest.net/item/mora-responsive-wordpress-blog-theme/full_screen_preview/20058026?_ga=2.109733061.152913890.1499079870-258482660.1494594926
+		http://demos.mcnika.com/mora/
 	Portfolio
 		http://preview.themeforest.net/item/bizi-a-wordpress-theme-for-food-bloggers/full_screen_preview/20017242?_ga=2.211829844.152913890.1499079870-258482660.1494594926
 	Blog
@@ -24,5 +24,6 @@ Pages
 	bbPress
 
 несколько шапок
+футер с http://demos.mcnika.com/mora/, boxed, full width
 C сайдбаром и без
 несколько колонок

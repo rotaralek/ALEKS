@@ -1,7 +1,7 @@
 @import 'base';
 @import 'jquery-ui';
 
-body, .body {
+body {
 	display: flex;
 	flex-direction: column;
 	align-items: stretch;
@@ -9,9 +9,27 @@ body, .body {
 }
 
 //Main container
-.main-container {
+.all-content-box {
 	flex: 1;
 	overflow: hidden;
+}
+
+//Header
+header {
+	.logo {
+
+	}
+	nav {
+
+	}
+	.search {
+
+	}
+}
+
+//Footer
+footer {
+
 }
 
 //Style selector

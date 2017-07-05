@@ -468,7 +468,7 @@ Redux::setSection( $opt_name, array(
 			'id'       => 'opt-spinner-use',
 			'type'     => 'select',
 			'title'    => __( 'Use spinner?', 'local' ),
-			'subtitle' => __( '', 'local' ),
+			'subtitle' => __( 'Select option', 'local' ),
 			'options'  => array(
 				'on'  => 'On',
 				'off' => 'Off'
@@ -482,19 +482,19 @@ Redux::setSection( $opt_name, array(
 			'subtitle' => __( 'Select spinner style.', 'local' ),
 			'options'  => array(
 				'1' => array(
-					'alt' => '1 Column',
+					'alt' => __( 'Style 1', 'local' ),
 					'img' => ReduxFramework::$_url . 'assets/img/1col.png'
 				),
 				'2' => array(
-					'alt' => '2 Column Left',
+					'alt' => __( 'Style 2', 'local' ),
 					'img' => ReduxFramework::$_url . 'assets/img/2cl.png'
 				),
 				'3' => array(
-					'alt' => '2 Column Right',
+					'alt' => __( 'Style 3', 'local' ),
 					'img' => ReduxFramework::$_url . 'assets/img/2cr.png'
 				),
 				'4' => array(
-					'alt' => '3 Column Middle',
+					'alt' => __( 'Style 4', 'local' ),
 					'img' => ReduxFramework::$_url . 'assets/img/3cm.png'
 				)
 			),
@@ -515,9 +515,10 @@ Redux::setSection( $opt_name, array(
 			'subtitle' => __( 'Insert the text', 'local' ),
 			'type'     => 'select',
 			'options'  => array(
-				'0' => __( 'Style 0', 'local' ),
-				'1' => __( 'Style 1', 'local' ),
-				'2' => __( 'Style 2', 'local' )
+				'1' => __( 'Two lines style', 'local' ),
+				'2' => __( 'Two lines full width style', 'local' ),
+				'3' => __( 'Three lines style', 'local' ),
+				'4' => __( 'Full width three lines style', 'local' )
 			)
 		),
 	)

@@ -54,12 +54,14 @@ if ( 'off' != tell_get_option( 'opt-spinner-use' ) ) {
 } ?>
 
 <?php //Header
-$header_type = 0;
+$header_type = 1;
 
-if ( 1 == tell_get_option( 'opt-header-type' ) ) {
-	$header_type = 1;
-} else if ( 2 == tell_get_option( 'opt-header-type' ) ) {
+if ( 2 == tell_get_option( 'opt-header-type' ) ) {
 	$header_type = 2;
+} else if ( 3 == tell_get_option( 'opt-header-type' ) ) {
+	$header_type = 3;
+} else if ( 4 == tell_get_option( 'opt-header-type' ) ) {
+	$header_type = 4;
 }
 
 get_template_part( 'partials/header/header-' . $header_type ); ?>
@@ -71,5 +73,3 @@ get_template_part( 'partials/style-selector' ); ?>
 <div class="all-content-box <?php if ( 'off' != tell_get_option( 'opt-spinner-use' ) ) {
 	echo 'fade-in-body';
 } ?> cf">
-
-	<div class="main-container">

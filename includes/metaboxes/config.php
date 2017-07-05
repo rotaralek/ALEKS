@@ -158,6 +158,58 @@ function tell_register_meta_boxes( $meta_boxes ) {
 		)
 	);
 
+	$meta_boxes[] = array(
+		'id'         => 'popularity',
+		'title'      => __( 'Popularity', 'local' ),
+		'post_types' => array( 'post', 'portfolio' ),
+		'context'    => 'normal',
+		'priority'   => 'high',
+		'fields'     => array(
+			array(
+				'name'     => __( 'Rating', 'local' ),
+				'id'       => $prefix . 'rating',
+				'type'     => 'number',
+				'readonly' => true,
+				'std'      => '0'
+			),
+			array(
+				'name'     => __( 'Rating number', 'local' ),
+				'id'       => $prefix . 'rating_number',
+				'type'     => 'number',
+				'readonly' => true,
+				'std'      => '0'
+			),
+			array(
+				'name'     => __( 'Rating sum', 'local' ),
+				'id'       => $prefix . 'rating_sum',
+				'type'     => 'number',
+				'readonly' => true,
+				'std'      => '0'
+			),
+			array(
+				'name'     => __( 'Views', 'local' ),
+				'id'       => $prefix . 'views',
+				'type'     => 'number',
+				'readonly' => true,
+				'std'      => '0'
+			),
+			array(
+				'name'     => __( 'Share', 'local' ),
+				'id'       => $prefix . 'share',
+				'type'     => 'number',
+				'readonly' => true,
+				'std'      => '0'
+			),
+			array(
+				'name'     => __( 'Likes', 'local' ),
+				'id'       => $prefix . 'likes',
+				'type'     => 'number',
+				'readonly' => true,
+				'std'      => '0'
+			)
+		)
+	);
+
 	foreach ( $meta_boxes as $k => $meta_box ) {
 		if ( isset( $meta_box[ 'only_on' ] ) && !rw_maybe_include( $meta_box[ 'only_on' ] ) ) {
 			unset( $meta_boxes[ $k ] );

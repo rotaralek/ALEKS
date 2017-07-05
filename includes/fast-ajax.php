@@ -22,20 +22,15 @@ $action = esc_attr( trim( $_POST[ 'action' ] ) );
 //A bit of security
 $allowed_actions = array(
 	'load_posts',
-	'load_categories',
-	'load_current_category',
-	'single_page_filter',
-	'reviews_create',
-	'reviews_posts',
-	'tell_get_country',
-	'tell_get_child_country',
-	'order_submit',
 	'change_red_col',
 	'change_blue_col',
 	'change_blue_light_col',
 	'change_yellow_col',
 	'change_orange_col',
-	'contact_form_submit'
+	'contact_form_submit',
+	'login_form',
+	'registration_form',
+	'registration'
 );
 
 if ( in_array( $action, $allowed_actions ) ) {
