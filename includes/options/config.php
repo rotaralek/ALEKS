@@ -481,24 +481,11 @@ Redux::setSection( $opt_name, array(
 			'title'    => __( 'Spinners', 'local' ),
 			'subtitle' => __( 'Select spinner style.', 'local' ),
 			'options'  => array(
-				'1' => array(
-					'alt' => __( 'Style 1', 'local' ),
-					'img' => ReduxFramework::$_url . 'assets/img/1col.png'
-				),
-				'2' => array(
-					'alt' => __( 'Style 2', 'local' ),
-					'img' => ReduxFramework::$_url . 'assets/img/2cl.png'
-				),
-				'3' => array(
-					'alt' => __( 'Style 3', 'local' ),
-					'img' => ReduxFramework::$_url . 'assets/img/2cr.png'
-				),
-				'4' => array(
-					'alt' => __( 'Style 4', 'local' ),
-					'img' => ReduxFramework::$_url . 'assets/img/3cm.png'
-				)
-			),
-			'default'  => '1'
+				'1' => __( 'Style 1', 'local' ),
+				'2' => __( 'Style 2', 'local' ),
+				'3' => __( 'Style 3', 'local' ),
+				'4' => __( 'Style 4', 'local' )
+			)
 		)
 	)
 ) );
