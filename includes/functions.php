@@ -1596,9 +1596,16 @@ function tell_sidebar_trigger( $content = NULL ) {
 	//Page begin
 	ob_start();
 
+	$page_object = get_queried_object();
+	echo '<pre>';
+	print_r($page_object);
+	echo '</pre>';
+
+	$sidebar_type = tell_get_meta( 'opt-sidebar-default' );
+
 	echo '<div class="row cf">';
 
-	if ( 'hide' != tell_get_meta( 'opt-sidebar-default' ) ) {
+	if ( 'hide' != $sidebar_type ) {
 		echo '<div class="col-md-9">';
 		echo '<div class="row cf">';
 	}
@@ -1609,7 +1616,7 @@ function tell_sidebar_trigger( $content = NULL ) {
 	//Page begin
 	ob_start();
 
-	if ( 'hide' != tell_get_meta( 'opt-sidebar-default' ) ) {
+	if ( 'hide' != $sidebar_type ) {
 		echo '</div>';
 		echo '</div>';
 
