@@ -5,16 +5,16 @@ Pages
 	Home page
 		http://demos.mcnika.com/mora/
 	Portfolio
-		http://preview.themeforest.net/item/bizi-a-wordpress-theme-for-food-bloggers/full_screen_preview/20017242?_ga=2.211829844.152913890.1499079870-258482660.1494594926
+		http://bizi.nanoagency.co/
 	Blog
-		http://demo.cadengrant.com/?theme=rosato
+		http://cadengrant.com/rosato/
 
 		single
-			http://preview.themeforest.net/item/mochi-a-clean-personal-wordpress-blog-theme/full_screen_preview/20008110?_ga=2.210387157.152913890.1499079870-258482660.1494594926
+			http://mochi.nanoagency.co/
 	About
-		http://preview.themeforest.net/item/desert-a-responsive-wordpress-blog-theme/full_screen_preview/20041732?_ga=2.143813749.152913890.1499079870-258482660.1494594926
+		http://plathemesky.com/desert/
 	Contact
-		http://preview.themeforest.net/item/mochi-a-clean-personal-wordpress-blog-theme/full_screen_preview/20008110?_ga=2.210387157.152913890.1499079870-258482660.1494594926
+		http://mochi.nanoagency.co/contact/
 	Search
 	Error
 	Shop

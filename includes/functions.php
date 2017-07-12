@@ -1585,177 +1585,43 @@ function add_current_nav_class( $classes, $item ) {
 
 }
 
-//Map
-/*-----------------------------------------------------------------------------------*/
-/*	Map
-/*-----------------------------------------------------------------------------------*/
-if ( !function_exists( 'tell_map' ) ) {
-	function tell_map( $atts, $content = null ) {
-		extract( shortcode_atts( array(
-			'address' => false,
-			'widht'   => '100%',
-			'height'  => '400px',
-		), $atts ) );
-
-		$address = $atts[ 'address' ];
-
-		if ( $address ) :
-
-			wp_print_scripts( 'google-maps-api' );
-
-			$coordinates = tell_map_get_coordinates( $address );
-
-			if ( !is_array( $coordinates ) )
-				return;
-
-			$map_id = uniqid( 'tell_map_' );
-
-			ob_start(); ?>
-			<div class="tell_map_canvas" id="<?php echo esc_attr( $map_id ); ?>" style="height: <?php echo esc_attr( $atts[ 'height' ] ); ?>; width: <?php echo esc_attr( $atts[ 'width' ] ); ?>"></div>
-			<script type="text/javascript">
-				var isDraggable = true;
-				if ( document.body.clientWidth <= 1024 ) {
-					isDraggable = false;
-				}
-				var map_<?php echo $map_id; ?>;
-				function tell_run_map_ <?php echo $map_id; ?>() {
-					var location = new google.maps.LatLng( "<?php echo $coordinates[ 'lat' ]; ?>", "<?php echo $coordinates[ 'lng' ]; ?>" );
-					var map_options = {
-						zoom: 15,
-						center: location,
-						mapTypeId: google.maps.MapTypeId.ROADMAP,
-						disableDefaultUI: true,
-						scrollwheel: false,
-						draggable: isDraggable,
-						styles: [ {
-							"featureType": "administrative",
-							"elementType": "labels.text.fill",
-							"stylers": [ { "color": "#444444" } ]
-						}, {
-							"featureType": "landscape",
-							"elementType": "all",
-							"stylers": [ { "color": "#f2f2f2" } ]
-						}, {
-							"featureType": "poi",
-							"elementType": "all",
-							"stylers": [ { "visibility": "off" } ]
-						}, {
-							"featureType": "poi.business",
-							"elementType": "geometry.fill",
-							"stylers": [ { "visibility": "on" } ]
-						}, {
-							"featureType": "road",
-							"elementType": "all",
-							"stylers": [ { "saturation": -100 }, { "lightness": 45 } ]
-						}, {
-							"featureType": "road.highway",
-							"elementType": "all",
-							"stylers": [ { "visibility": "simplified" } ]
-						}, {
-							"featureType": "road.arterial",
-							"elementType": "labels.icon",
-							"stylers": [ { "visibility": "off" } ]
-						}, {
-							"featureType": "transit",
-							"elementType": "all",
-							"stylers": [ { "visibility": "off" } ]
-						}, {
-							"featureType": "water",
-							"elementType": "all",
-							"stylers": [ { "color": "#b4d4e1" }, { "visibility": "on" } ]
-						} ]
-					};
-					map_<?php echo $map_id; ?> = new google.maps.Map( document.getElementById( "<?php echo $map_id; ?>" ), map_options );
-					var marker = new google.maps.Marker( {
-						position: location,
-						icon: "<?php echo get_template_directory_uri(); ?>/assets/images/map-icon.png",
-						map: map_<?php echo $map_id; ?>,
-						draggable: true,
-						animation: google.maps.Animation.DROP
-					} );
-
-				}
-				tell_run_map_<?php echo $map_id; ?>();
-			</script>
-			<?php
-		endif;
-
-		return ob_get_clean();
-
-	}
-
-	add_shortcode( 'tell_map', 'tell_map' );
-
-
-	//Loads Google Map API
-	function tell_map_load_scripts() {
-		$api_key = tell_get_meta( 'template_contact_api_key' );
-		wp_register_script( 'google-maps-api', 'http://maps.google.com/maps/api/js?key=' . $api_key );
-	}
-
-	add_action( 'wp_enqueue_scripts', 'tell_map_load_scripts' );
-
-
-	//Retrieve coordinates for an address
-	function tell_map_get_coordinates( $address, $force_refresh = false ) {
-
-		$address_hash = md5( $address );
-
-		$coordinates = get_transient( $address_hash );
-
-		if ( $force_refresh || $coordinates === false ) {
-
-			$args     = array( 'address' => urlencode( $address ) );
-			$url      = add_query_arg( $args, 'http://maps.googleapis.com/maps/api/geocode/json' );
-			$response = wp_remote_get( $url );
-
-			if ( is_wp_error( $response ) )
-				return;
-
-			$data = wp_remote_retrieve_body( $response );
-
-			if ( is_wp_error( $data ) )
-				return;
-
-			if ( $response[ 'response' ][ 'code' ] == 200 ) {
-
-				$data = json_decode( $data );
-
-				if ( $data->status === 'OK' ) {
-
-					$coordinates = $data->results[ 0 ]->geometry->location;
-
-					$cache_value[ 'lat' ]     = $coordinates->lat;
-					$cache_value[ 'lng' ]     = $coordinates->lng;
-					$cache_value[ 'address' ] = (string)$data->results[ 0 ]->formatted_address;
-
-					// cache coordinates for 3 months
-					set_transient( $address_hash, $cache_value, 3600 * 24 * 30 * 3 );
-					$data = $cache_value;
-
-				} elseif ( $data->status === 'ZERO_RESULTS' ) {
-					return __( 'No location for the address.', 'local' );
-				} elseif ( $data->status === 'INVALID_REQUEST' ) {
-					return __( 'Bad request. Did you enter an address name?', 'local' );
-				} else {
-					return __( 'Error, please check if you have entered the shortcode correctly.', 'local' );
-				}
-
-			} else {
-				return __( 'Can\'t connect Google API.', 'local' );
-			}
-
-		} else {
-			// return cached results
-			$data = $coordinates;
-		}
-
-		return $data;
-	}
-}
-
 //Woocommerce
 add_action( 'after_setup_theme', 'woocommerce_support' );
 function woocommerce_support() {
 	add_theme_support( 'woocommerce' );
+}
+
+//Sidebar Hide / Show
+function tell_sidebar_trigger( $content = NULL ) {
+	//Page begin
+	ob_start();
+
+	echo '<div class="row cf">';
+
+	if ( 'hide' != tell_get_meta( 'opt-sidebar-default' ) ) {
+		echo '<div class="col-md-9">';
+		echo '<div class="row cf">';
+	}
+
+	$page_start = ob_get_contents();
+	ob_end_clean();
+
+	//Page begin
+	ob_start();
+
+	if ( 'hide' != tell_get_meta( 'opt-sidebar-default' ) ) {
+		echo '</div>';
+		echo '</div>';
+
+		echo '<div class="col-md-3">';
+			get_sidebar();
+		echo '</div>';
+	}
+
+	echo '</div>';
+
+	$page_end = ob_get_contents();
+	ob_end_clean();
+
+	return $page_start . $content . $page_end;
 }

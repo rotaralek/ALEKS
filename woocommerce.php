@@ -1,24 +1,23 @@
-<?php get_header( '2' ); ?>
+<?php get_header(); ?>
 
-	<div class="container padding-top-60">
-		<div class="row cf">
-			<div class="col-md-9 margin-bottom-30">
-				<?php if ( have_posts() ) :
-					woocommerce_content();
-				endif;
-				wp_reset_query(); ?>
-			</div>
-
-			<div class="col-md-3 margin-bottom-30">
-				<div class="sidebar cf">
-					<?php if ( function_exists( 'dynamic_sidebar' ) && dynamic_sidebar( 'sidebar-shop' ) ) {
-						//dynamic_sidebar('sidebar-shop');
-					} else {
-						get_sidebar();
-					} ?>
-				</div>
-			</div>
+	<section class="container">
+		<div class="heading">
+			<h1><?php wp_title( '', true ); ?></h1>
 		</div>
-	</div>
+
+		<?php ob_start();
+
+		if ( have_posts() ) :
+			woocommerce_content();
+		endif;
+		wp_reset_query();
+
+		$content = ob_get_contents();
+		ob_end_clean();
+
+		//Show or hide sidebar function
+		tell_sidebar_trigger( $content ); ?>
+	</section>
 
 <?php get_footer(); ?>
+

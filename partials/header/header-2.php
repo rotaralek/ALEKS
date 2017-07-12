@@ -1,4 +1,4 @@
-<header class="type-0 cf">
+<header class="type-2 cf">
 	<div class="cf">
 		<div class="right">
 			<div class="share">

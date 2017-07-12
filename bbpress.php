@@ -1,19 +1,24 @@
-<?php get_header( '2' ); ?>
+<?php get_header(); ?>
 
-	<div class="container padding-top-60">
-		<div class="row cf">
-			<div class="col-md-9 margin-bottom-30">
-				<?php if ( have_posts() ) : while ( have_posts() ) : the_post();
-					the_content();
-				endwhile; endif; ?>
-			</div>
-
-			<div class="col-md-3 margin-bottom-30">
-				<div class="sidebar cf">
-					<?php get_sidebar(); ?>
-				</div>
-			</div>
-		</div>
+<section class="container">
+	<div class="heading">
+		<h1><?php wp_title( '', true ); ?></h1>
 	</div>
 
+	<?php ob_start();
+
+	if ( have_posts() ) : while ( have_posts() ) : the_post();
+		the_content();
+		wp_link_pages();
+	endwhile; endif;
+	wp_reset_query();
+
+	$content = ob_get_contents();
+	ob_end_clean();
+
+	//Show or hide sidebar function
+	tell_sidebar_trigger( $content ); ?>
+</section>
+
 <?php get_footer(); ?>
+

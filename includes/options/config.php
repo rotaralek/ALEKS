@@ -512,6 +512,55 @@ Redux::setSection( $opt_name, array(
 ) );
 
 Redux::setSection( $opt_name, array(
+	'title'  => __( 'Sidebar', 'local' ),
+	'id'     => 'opt-sidebar',
+	'desc'   => __( 'Insert details.', 'local' ),
+	'icon'   => 'el el-flag',
+	'fields' => array(
+		array(
+			'id'       => 'opt-sidebar-default',
+			'title'    => __( 'Sidebar on default page', 'local' ),
+			'subtitle' => __( 'Select option', 'local' ),
+			'type'     => 'select',
+			'options'  => array(
+				'show' => __( 'Show', 'local' ),
+				'hide' => __( 'Hide', 'local' )
+			)
+		),
+		array(
+			'id'       => 'opt-sidebar-blog',
+			'title'    => __( 'Sidebar on blog page', 'local' ),
+			'subtitle' => __( 'Select option', 'local' ),
+			'type'     => 'select',
+			'options'  => array(
+				'show' => __( 'Show', 'local' ),
+				'hide' => __( 'Hide', 'local' )
+			)
+		),
+		array(
+			'id'       => 'opt-sidebar-portfolio',
+			'title'    => __( 'Sidebar on portfolio page', 'local' ),
+			'subtitle' => __( 'Select option', 'local' ),
+			'type'     => 'select',
+			'options'  => array(
+				'show' => __( 'Show', 'local' ),
+				'hide' => __( 'Hide', 'local' )
+			)
+		),
+		array(
+			'id'       => 'opt-sidebar-single',
+			'title'    => __( 'Sidebar on single page', 'local' ),
+			'subtitle' => __( 'Select option', 'local' ),
+			'type'     => 'select',
+			'options'  => array(
+				'show' => __( 'Show', 'local' ),
+				'hide' => __( 'Hide', 'local' )
+			)
+		),
+	)
+) );
+
+Redux::setSection( $opt_name, array(
 	'title' => __( 'Footer', 'local' ),
 	'id'    => 'opt-footer',
 	'icon'  => 'el el-cog'
