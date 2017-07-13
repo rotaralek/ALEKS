@@ -32,8 +32,7 @@ foreach ( glob( dirname( __FILE__ ) . '/tgm/*.php' ) as $file ) {
 }
 
 //Redux
-if ( !class_exists( 'ReduxFramework' ) && file_exists( dirname( __FILE__ ) . '/options/redux-framework.php' ) ) {
-	require_once( dirname( __FILE__ ) . '/options/redux-framework.php' );
+if ( class_exists( 'ReduxFramework' ) && file_exists( dirname( __FILE__ ) . '/options/config.php' ) ) {
 	require_once( dirname( __FILE__ ) . '/options/config.php' );
 }
 

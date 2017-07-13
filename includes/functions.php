@@ -38,6 +38,11 @@ add_action( 'tgmpa_register', 'tell_theme_register_required_plugins' );
 function tell_theme_register_required_plugins() {
 	$plugins = array(
 		array(
+			'name'     => 'Redux Framework',
+			'slug'     => 'redux-framework',
+			'required' => true,
+		),
+		array(
 			'name'     => 'Shortcodes Ultimate',
 			'slug'     => 'shortcodes-ultimate',
 			'required' => false,

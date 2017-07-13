@@ -7,7 +7,9 @@ Author: new-unique-themes
 Author URI: http://new-unique-themes.com/
 License: Themeforest Split Licence
 License URI: -
-Tags: light, white, red, blue, light blue, orange, yellow, one-column, two-columns, right-sidebar, fixed-layout, fluid-layout, custom-header, custom-menu, featured-images, flexible-header, full-width-template, microformats, post-formats, sticky-post, theme-options, translation-ready, WPML ready, woocommerce, metaboxes, options, shortcodes, bbPress, boddyPress,
+Tags: two-columns, right-sidebar, buddypress, theme-options, threaded-comments, translation-ready, blog, e-commerce, news
+Text Domain: local
+Domain Path: /languages
 */
 #wp-admin-bar-wp-logo {
     display: none !important;
@@ -27,3 +29,4 @@ Tags: light, white, red, blue, light blue, orange, yellow, one-column, two-colum
 .alignright{}
 .alignleft{}
 .aligncenter{}
+.sticky {}
