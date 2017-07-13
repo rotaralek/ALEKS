@@ -183,11 +183,15 @@ function tell_get_image( $url, $width = null, $height = null, $crop = true, $sin
 			}
 		}
 	} else {
-		$url = tell_get_option( 'opt-thumbnail' );
-		if ( isset( $url[ 'url' ] ) ) {
-			$image_size = aq_resize( $url[ 'url' ], $width, $height, $crop, $single, $upscale );
+		if ( tell_get_option( 'opt-thumbnail' ) ) {
+			$url = tell_get_option( 'opt-thumbnail' );
+			if ( isset( $url[ 'url' ] ) ) {
+				$image_size = aq_resize( $url[ 'url' ], $width, $height, $crop, $single, $upscale );
 
-			return '<img ' . $lazy_load_attributes . '="' . $image_size . '" width="' . $width . '" height="' . $height . '" alt="">';
+				return '<img ' . $lazy_load_attributes . '="' . $image_size . '" width="' . $width . '" height="' . $height . '" alt="">';
+			}
+		} else {
+			return;
 		}
 	}
 }
@@ -201,11 +205,15 @@ function tell_get_image_src( $url, $width = null, $height = null, $crop = true, 
 
 		return $image_size;
 	} else {
-		$url = tell_get_option( 'opt-thumbnail' );
-		if ( isset( $url[ 'url' ] ) ) {
-			$image_size = aq_resize( $url[ 'url' ], $width, $height, $crop, $single, $upscale );
+		if ( tell_get_option( 'opt-thumbnail' ) ) {
+			$url = tell_get_option( 'opt-thumbnail' );
+			if ( isset( $url[ 'url' ] ) ) {
+				$image_size = aq_resize( $url[ 'url' ], $width, $height, $crop, $single, $upscale );
 
-			return $image_size;
+				return $image_size;
+			}
+		} else {
+			return;
 		}
 	}
 }
@@ -246,11 +254,15 @@ function tell_get_post_image( $width = null, $height = null, $crop = true, $sing
 			}
 		}
 	} else {
-		$url = tell_get_option( 'opt-thumbnail' );
-		if ( isset( $url[ 'url' ] ) ) {
-			$image_size = aq_resize( $url[ 'url' ], $width, $height, $crop, $single, $upscale );
+		if ( tell_get_option( 'opt-thumbnail' ) ) {
+			$url = tell_get_option( 'opt-thumbnail' );
+			if ( isset( $url[ 'url' ] ) ) {
+				$image_size = aq_resize( $url[ 'url' ], $width, $height, $crop, $single, $upscale );
 
-			return '<img ' . $lazy_load_attributes . '="' . $image_size . '" width="' . $width . '" height="' . $height . '" alt="' . get_the_title() . '" title="' . get_the_title() . '">';
+				return '<img ' . $lazy_load_attributes . '="' . $image_size . '" width="' . $width . '" height="' . $height . '" alt="' . get_the_title() . '" title="' . get_the_title() . '">';
+			}
+		} else {
+			return;
 		}
 	}
 	exit();
@@ -292,11 +304,15 @@ function tell_get_post_image_by_post_id( $post_id, $width = null, $height = null
 			}
 		}
 	} else {
-		$url = tell_get_option( 'opt-thumbnail' );
-		if ( isset( $url[ 'url' ] ) ) {
-			$image_size = aq_resize( $url[ 'url' ], $width, $height, $crop, $single, $upscale );
+		if ( tell_get_option( 'opt-thumbnail' ) ) {
+			$url = tell_get_option( 'opt-thumbnail' );
+			if ( isset( $url[ 'url' ] ) ) {
+				$image_size = aq_resize( $url[ 'url' ], $width, $height, $crop, $single, $upscale );
 
-			return '<img ' . $lazy_load_attributes . '="' . $image_size . '" width="' . $width . '" height="' . $height . '" alt="' . get_the_title() . '" title="' . get_the_title() . '">';
+				return '<img ' . $lazy_load_attributes . '="' . $image_size . '" width="' . $width . '" height="' . $height . '" alt="' . get_the_title() . '" title="' . get_the_title() . '">';
+			}
+		} else {
+			return;
 		}
 	}
 }
@@ -313,11 +329,15 @@ function tell_get_post_image_src( $width = null, $height = null, $crop = true, $
 
 		return $image_size;
 	} else {
-		$url = tell_get_option( 'opt-thumbnail' );
-		if ( isset( $url[ 'url' ] ) ) {
-			$image_size = aq_resize( $url[ 'url' ], $width, $height, $crop, $single, $upscale );
+		if ( tell_get_option( 'opt-thumbnail' ) ) {
+			$url = tell_get_option( 'opt-thumbnail' );
+			if ( isset( $url[ 'url' ] ) ) {
+				$image_size = aq_resize( $url[ 'url' ], $width, $height, $crop, $single, $upscale );
 
-			return $image_size;
+				return $image_size;
+			}
+		} else {
+			return;
 		}
 	}
 }
@@ -343,11 +363,15 @@ function tell_get_attachment_image( $attachment_id = null, $width = null, $heigh
 			return '<img ' . $lazy_load_attributes . '="' . $image_size . '" width="' . $width . '" height="' . $height . '" alt="' . get_the_title() . '" title="' . get_the_title() . '">';
 		}
 	} else {
-		$url = tell_get_option( 'opt-thumbnail' );
-		if ( isset( $url[ 'url' ] ) ) {
-			$image_size = aq_resize( $url[ 'url' ], $width, $height, $crop, $single, $upscale );
+		if ( tell_get_option( 'opt-thumbnail' ) ) {
+			$url = tell_get_option( 'opt-thumbnail' );
+			if ( isset( $url[ 'url' ] ) ) {
+				$image_size = aq_resize( $url[ 'url' ], $width, $height, $crop, $single, $upscale );
 
-			return '<img ' . $lazy_load_attributes . '="' . $image_size . '" width="' . $width . '" height="' . $height . '" alt="' . get_the_title() . '" title="' . get_the_title() . '">';
+				return '<img ' . $lazy_load_attributes . '="' . $image_size . '" width="' . $width . '" height="' . $height . '" alt="' . get_the_title() . '" title="' . get_the_title() . '">';
+			}
+		} else {
+			return;
 		}
 	}
 }
@@ -363,11 +387,15 @@ function tell_get_attachment_src( $attachment_id = null, $width = null, $height 
 
 		return $image_size;
 	} else {
-		$url = tell_get_option( 'opt-thumbnail' );
-		if ( isset( $url[ 'url' ] ) ) {
-			$image_size = aq_resize( $url[ 'url' ], $width, $height, $crop, $single, $upscale );
+		if ( tell_get_option( 'opt-thumbnail' ) ) {
+			$url = tell_get_option( 'opt-thumbnail' );
+			if ( isset( $url[ 'url' ] ) ) {
+				$image_size = aq_resize( $url[ 'url' ], $width, $height, $crop, $single, $upscale );
 
-			return $image_size;
+				return $image_size;
+			}
+		} else {
+			return;
 		}
 	}
 }
