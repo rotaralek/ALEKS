@@ -1624,6 +1624,12 @@ function woocommerce_support() {
 	add_theme_support( 'woocommerce' );
 }
 
+//Page title support
+add_action( 'after_setup_theme', 'theme_slug_setup' );
+function theme_slug_setup() {
+	add_theme_support( 'title-tag' );
+}
+
 //Sidebar Hide / Show
 function tell_sidebar_trigger( $content = NULL ) {
 	//Page begin
