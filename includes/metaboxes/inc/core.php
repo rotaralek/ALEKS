@@ -37,8 +37,8 @@ class RWMB_Core
 	 */
 	public function plugin_links( $links )
 	{
-		$links[] = '<a href="https://metabox.io/docs/">' . __( 'Documentation', 'meta-box' ) . '</a>';
-		$links[] = '<a href="https://metabox.io/plugins/">' . __( 'Extensions', 'meta-box' ) . '</a>';
+		$links[] = '<a href="https://metabox.io/docs/">' . __( 'Documentation', 'local' ) . '</a>';
+		$links[] = '<a href="https://metabox.io/plugins/">' . __( 'Extensions', 'local' ) . '</a>';
 		return $links;
 	}
 

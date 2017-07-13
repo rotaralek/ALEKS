@@ -31,7 +31,7 @@ class RWMB_User_Field extends RWMB_Object_Choice_Field
 		/**
 		 * Set default placeholder
 		 */
-		$field['placeholder'] = empty( $field['placeholder'] ) ? __( 'Select an user', 'meta-box' ) : $field['placeholder'];
+		$field['placeholder'] = empty( $field['placeholder'] ) ? __( 'Select an user', 'local' ) : $field['placeholder'];
 
 		/**
 		 * Set default query args
