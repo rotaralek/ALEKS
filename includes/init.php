@@ -40,6 +40,10 @@ function create_enqueue_scripts() {
 			'nonce'  => wp_create_nonce( 'ajax_admin-nonce' )
 		)
 	);
+
+	if ( is_singular() ) {
+		wp_enqueue_script( "comment-reply" );
+	}
 }
 
 add_action( 'wp_enqueue_scripts', 'create_enqueue_scripts' );
