@@ -12,6 +12,8 @@
 				<?php the_content();
 				wp_link_pages(); ?>
 			</div>
+
+			<?php comments_template(); ?>
 		<?php endwhile; endif;
 		wp_reset_query();
 

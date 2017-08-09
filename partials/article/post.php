@@ -17,5 +17,9 @@
 		<div class="description">
 			<?php echo tell_trim_excerpt( 60 ); ?>
 		</div>
+
+		<div class="tags">
+			<?php the_tags( '' ); ?>
+		</div>
 	</div>
 </article>

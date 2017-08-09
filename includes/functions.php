@@ -1,9 +1,4 @@
 <?php
-//Meta box init
-foreach ( glob( dirname( __FILE__ ) . '/metaboxes/*.php' ) as $file ) {
-	require_once( $file );
-}
-
 /**
  * Get meta
  */
@@ -38,6 +33,11 @@ add_action( 'tgmpa_register', 'tell_theme_register_required_plugins' );
 function tell_theme_register_required_plugins() {
 	$plugins = array(
 		array(
+			'name'     => 'Meta box',
+			'slug'     => 'meta-box',
+			'required' => true,
+		),
+		array(
 			'name'     => 'Redux Framework',
 			'slug'     => 'redux-framework',
 			'required' => true,
@@ -63,7 +63,8 @@ function tell_theme_register_required_plugins() {
 			'required' => false,
 		),
 	);
-	$config  = array(
+
+	$config = array(
 		'id'           => 'tgmpa',                 // Unique ID for hashing notices for multiple instances of TGMPA.
 		'default_path' => '',                      // Default absolute path to bundled plugins.
 		'menu'         => 'tgmpa-install-plugins', // Menu slug.
@@ -74,6 +75,14 @@ function tell_theme_register_required_plugins() {
 		'dismiss_msg'  => '',                      // If 'dismissable' is false, this message will be output at top of nag.
 		'is_automatic' => false,                   // Automatically activate plugins after installation or not.
 		'message'      => '',                      // Message to output right before the plugins table.
+
+		'strings' => array(
+			'page_title' => __( 'Install Required Plugins', 'local' ),
+			'menu_title' => __( 'Install Plugins', 'local' ),
+			// <snip>...</snip>
+			'nag_type'   => 'updated', // Determines admin notice type - can only be 'updated', 'update-nag' or 'error'.
+		)
+
 	);
 
 	tgmpa( $plugins, $config );
@@ -1624,10 +1633,20 @@ function woocommerce_support() {
 	add_theme_support( 'woocommerce' );
 }
 
-//Page title support
+//Page title support and feed links
 add_action( 'after_setup_theme', 'theme_slug_setup' );
 function theme_slug_setup() {
 	add_theme_support( 'title-tag' );
+	add_theme_support( 'automatic-feed-links' );
+}
+
+//Maximal content length
+if ( !isset( $content_width ) ) {
+	$content_width = 900;
+
+	if ( tell_get_option( 'opt-content-width' ) ) {
+		$content_width = intval( tell_get_option( 'opt-content-width' ) );
+	}
 }
 
 //Sidebar Hide / Show

@@ -29,7 +29,7 @@ if ( comments_open( $post->ID ) ):
 							</div>
 
 							<?php if ( $comment->comment_approved == '0' ) : ?>
-								<em><?php _e( 'Your comment is awaiting moderation.' ) ?></em>
+								<em><?php _e( 'Your comment is awaiting moderation.', 'local' ) ?></em>
 								<br/>
 							<?php endif; ?>
 						</div>
@@ -65,6 +65,8 @@ if ( comments_open( $post->ID ) ):
 	echo '<div class="comments-list">';
 	wp_list_comments( $args );
 	echo '</div>';
+
+	the_comments_pagination();
 
 
 	$fields = array(

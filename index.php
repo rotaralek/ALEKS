@@ -2,7 +2,14 @@
 
 	<section class="container">
 		<div class="heading">
-			<h1><?php wp_title( '', true ); ?></h1>
+			<h1>
+				<?php
+				if ( '' != wp_title( '', false ) ) {
+					wp_title( '', true );
+				} else {
+					_e( 'Blog', 'local' );
+				} ?>
+			</h1>
 		</div>
 
 		<?php ob_start();
@@ -16,7 +23,7 @@
 			)
 		);
 		if ( $query->have_posts() ) : while ( $query->have_posts() ) : $query->the_post();
-			get_template_part('/partials/article/post');
+			get_template_part( '/partials/article/post' );
 		endwhile; endif;
 		wp_reset_query();
 

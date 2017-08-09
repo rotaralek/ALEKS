@@ -6,19 +6,14 @@ require_once( dirname( __FILE__ ) . '/ajax.php' );
 //CSS style options add to the page
 require_once( dirname( __FILE__ ) . '/css-options/css-options.php' );
 
-//Post type init
-foreach ( glob( dirname( __FILE__ ) . '/post-type/*.php' ) as $file ) {
-	require_once( $file );
-}
-
-//Taxonomies init
-foreach ( glob( dirname( __FILE__ ) . '/taxonomies/*.php' ) as $file ) {
-	require_once( $file );
-}
-
-//Meta box init
+//Meta box config init
 foreach ( glob( dirname( __FILE__ ) . '/metaboxes/*.php' ) as $file ) {
 	require_once( $file );
+}
+
+//Redux config init
+if ( class_exists( 'ReduxFramework' ) ) {
+	require_once( dirname( __FILE__ ) . '/options/config.php' );
 }
 
 //Image size init
@@ -31,12 +26,10 @@ foreach ( glob( dirname( __FILE__ ) . '/tgm/*.php' ) as $file ) {
 	require_once( $file );
 }
 
-//Redux
-if ( class_exists( 'ReduxFramework' ) && file_exists( dirname( __FILE__ ) . '/options/config.php' ) ) {
-	require_once( dirname( __FILE__ ) . '/options/config.php' );
-}
+/*
+ * Widgets init
+ */
 
-//Widgets init
 //Post widget
 foreach ( glob( dirname( __FILE__ ) . '/widgets/most-popular-posts/*.php' ) as $file ) {
 	require_once( $file );
